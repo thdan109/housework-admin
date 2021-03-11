@@ -1,0 +1,78 @@
+
+.ContainerBrowserHeader{
+   width: 16%;
+   margin: 0;
+   /* border: 1px solid black; */
+   /* font-family: 'Kodchasan', sans-serif; */
+   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   height: 100%;
+   position: absolute;
+   left: 0;
+   overflow: hidden;
+   
+}
+
+.ContainerMenuAdmin{
+   border: 1px solid black;
+   margin-top: 0;
+   width: 100%;
+   height: 100%;
+}
+.parentMenuAdmin{
+   float: left;
+   width: 100%;
+   height: 100%;
+   background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
+}
+.MenuAdmin{
+   float: left;
+   width: 100%;
+   height: 45px;
+}
+.MenuAdmin .NavLinkMenuAdmin{
+   padding: 0;
+   height: 100%;
+   /* height: 40px; */
+   background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
+   border: 1px solid white;  
+}
+.MenuAdmin .LinkMenu{
+   font-size: 18px;
+   display: inline-block;
+   padding: 7px 35px;
+   width: 100%;
+   height: 100%;
+   color: black ;
+   font-weight: 800;
+   text-decoration: none;
+}
+
+.LinkMenu:focus{
+   background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+   color: white;
+}
+.MenuAdmin .ContainerInfor{
+   margin-bottom: 15px;
+   margin-left: 20px;
+   position: absolute;
+   bottom: 0;
+}
+.inforAd{
+   border-bottom: #1e3c72 1px solid;
+   height: 30px;
+}
+.logout-link{
+   text-decoration: none;
+   color: black;
+}
+.logout-link:hover{
+   text-decoration: none;
+   color: black;
+}
+.TableMaterial{
+   border: 1px solid black;
+   width: 85%;
+   height: 100%;
+   float: right;
+   /* margin: auto; */
+}

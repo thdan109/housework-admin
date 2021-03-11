@@ -1,0 +1,55 @@
+/* .test{
+   border: 1px solid black;
+   float: right;
+   width: 80%;
+} */
+.btnMenu{
+   margin-top: 30px;
+   margin-left: 50px;
+   padding: 5px 40px;
+   background-color: #DCDCDC;
+   border: 2px solid black;
+   color: black;
+   font-size: 18px;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-weight: bolder;
+   border-radius: 7px;
+}
+.btnMenu:hover{
+   /* border: 3px solid black; */
+   /* border: 0.125rem dashed black; */
+   /* bottom: 0.125rem * -1;
+   left: 0.125rem * -1;
+   right: 0.125rem * -1;
+   top: 0.125rem * -1; */
+}
+.btnMenu:focus{
+   /* border: 3px solid black; */
+   /* border: 0.125rem dashed black; */
+   /* bottom: 0.125rem * -1;
+   left: 0.125rem * -1;
+   right: 0.125rem * -1;
+   top: 0.125rem * -1; */
+}
+
+   
+
+.MuiTypography-body1{
+   color: black;
+}
+.Link{
+   text-decoration: none;
+}
+.Link:hover{
+   text-decoration: none;
+}
+.logout-link{
+   text-decoration: none;
+   color: black;
+}
+.logout-link:hover{
+   text-decoration: none;
+   color: black;
+}
+
+

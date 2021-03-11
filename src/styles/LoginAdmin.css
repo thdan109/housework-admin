@@ -1,0 +1,72 @@
+.ContainerLoginAdmin{
+   width: 100%;
+   margin: 0;
+   height: 100%;
+   position: absolute;
+   left: 0;
+   overflow: hidden;
+   
+}
+.LoginAdmin{
+   /* float: right; */
+   margin: auto;
+   margin-top: 8%;
+   /* border: 1px solid black; */
+   width: 30%;
+   height: 60%;
+}
+.TitleLoginAdmin{
+   font-weight: 600;
+   font-size: 50px;
+   text-align: center;
+   margin-bottom: 60px;
+   
+}
+/* Input */
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl {
+   width: 540px;
+}
+.MuiFormControl-root.MuiTextField-root{
+   margin: 15px;
+}
+
+/* Button */
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-text{
+   width: 540px;
+   background-color: orangered;
+   color: white;
+   font-size: 16px;
+   font-weight: 600;
+   margin: 15px;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-text:hover{
+   background-color: orange;
+   font-weight: 900;
+}
+/* .btnlogin{
+   width: 540px;
+   background-color: orangered;
+   color: white;
+   font-size: 16px;
+   font-weight: 600;
+   margin: 20px;
+}
+.btnlogin:hover{
+   background-color: orange;
+   font-weight: 900;
+} */
+@media screen and (max-width: 1000px) {
+   .ContainerLoginAdmin{
+      width: auto;
+   }
+   .LoginAdmin {
+      float: none;
+      width: 100%;
+      border: none;
+      margin: 0;
+   }
+   .MuiButtonBase-root.MuiButton-root.MuiButton-text, .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl{
+      width: 380px;
+   }
+ }
