@@ -8,6 +8,10 @@ import CustomerHeader from './components/CustomerHeader'
 import StaffManagement from './components/StaffManangent';
 import CustomerManagement from './components/CustomerManagement';
 import ServiceManagement from './components/AdminServiceManagement';
+import OrderManagement from './components/AdminOrderManagement'
+import MyComponent from './components/FeedbackAdmin'
+
+
 import Test from './components/test';
 import Cookies from 'js-cookie';
 import './App.css'
@@ -32,6 +36,8 @@ const  App = () => {
                <Route path='/admin/staffs' component={StaffManagement} /> 
                <Route path='/admin/customers' component={CustomerManagement} /> 
                <Route path='/admin/services' component={ServiceManagement} />  
+               <Route path='/admin/orders' component={OrderManagement} />
+               <Route path='/admin/feedbacks' component={MyComponent} />
             </div>    
               
          </div>
