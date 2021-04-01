@@ -7,7 +7,8 @@ import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
 import OrderScreen from './CookingService'
-
+import ClearScreen from './ClearService'
+import WashingComponent from './WashingService'
 
 import '../styles/OrderAdmin.css'
 
@@ -95,8 +96,8 @@ const AdminOrder = () =>{
                >
                   <option value={1}>Nấu ăn</option>
                   <option value={2}>Dọn dẹp nhà</option>
-                  <option value={3}>Chăm sóc sân vườn</option>
-                  <option value={4}>Giặt ủi</option>
+                  <option value={3}>Giặt ủi</option>
+                  <option value={4}>--------</option>
                   
                </NativeSelect>
                {/* <FormHelperText>Label + placeholder</FormHelperText> */}
@@ -110,10 +111,11 @@ const AdminOrder = () =>{
                   <OrderScreen /> 
                :           
                (type.housework == true)?
-                  <div>a2</div>
+                  // <div>a2</div>
+                  <ClearScreen />
                :
                (type.washing === true)?
-                  <div>a3</div>
+                  <WashingComponent/>
                :
                (type.farm === true)?
                <div>a4</div>

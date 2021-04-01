@@ -19,91 +19,86 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useEffect } from 'react';
 import MyComponent from './getDataStaffFree'
-import ModalAssignment from './ModalAssignment'
+import ModalWashing from './modals/ModalWashing'
 
-const tableIcons = {
-    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-  };
+   const tableIcons = {
+      Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+      Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+      Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+      Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+      DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+      Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+      Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+      Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+      FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+      LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+      NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+      PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+      ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+      Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+      SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+      ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+      ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+   };
 
-
-  const  CookingOrder = ( props ) => {
-
-   useEffect(()=>{
-      getDataOrder();
-      // getDataStaff();
-   },[])
+   const WashingOrder = () =>{
+      useEffect(()=>{
+         getData()
+      }, [])
 
 
-   const getDataOrder = () =>{
-      Axios.get('http://localhost:216/cooking/dataCooking').then(res =>{
-         setData(res.data)  
-      })  
-   }
-
-   // const getDataStaff = () =>{
-   //    console.log('aa');
-   //    Axios.get('http://localhost:216/staff/statusStaff').then(res =>{
-   //       setDataStaff({arrs: res.data})
-   //    })
-   // }
+   const [data, setData] = useState([]);
    
+   const getData = async() =>{
+      const data = await Axios.get('http://localhost:216/washing/getData')
+      // console.log(data.data);
+      setData(data.data)
+   }
 
    const  [columns, setColumns] = useState([
       { title: "ID đơn", field: '_id'},
       { title: 'Tên KH', field: 'fullname' },
-      { title: "Số người ăn", field: 'number'},
-      { title: 'Món ăn', field: 'dishList', render: rowData =>
-         rowData.dishList.map((dt, index)=> <p>{dt}</p>)
+      { title: "Ngày gửi", field: 'dateSend', type: 'date'},
+      { title: 'Giờ gửi', field: 'timeSend'},
+      { title: "Ngày nhận", field: 'dateTake', type: 'date'},
+      { title: 'Giờ nhận', field: 'timeTake'},
+      { title: 'Nhân viên', field: 'staff' ,
+         render: rowData=>
+            rowData.staff.map((dt)=> <p>{dt}</p>)
       },
-      { title: 'Nhân viên' , field: 'staff', render: rowData=>
-         rowData.staff.map((dt)=> <p>{dt}</p>)
-      },
-      { title: 'Đi chợ', field: 'goMarket'},
-      { title: 'Thời gian', field: 'time'},
-      { title: 'Ngày', field: 'date', type: 'date'},
-      { title: 'Trạng thái', field: 'status', render: rowData => (
-         <>
-             <select style={{ borderWidth:  0, fontSize: 14}}>
-               <option>Đang chờ</option>
-               <option>Xác nhận</option>
-             </select>
-             {/* <input type="checkbox"/> */}
-         </>
-       )},
+      { title: 'Ghi chú', field: 'note'},
+      // { title: 'Trạng thái', field: 'status', render: rowData => (
+      //    <>
+      //        <select style={{ borderWidth:  0, fontSize: 14}}>
+      //          <option>Đang chờ</option>
+      //          <option>Xác nhận</option>
+      //        </select>
+      //        {/* <input type="checkbox"/> */}
+      //    </>
+      //  )},
       { title: 'Địa chỉ', field: 'address' },
       { title: 'Tổng tiền',  field: 'money'},
       { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
          <>
-            <ModalAssignment data={[{time:rowData.time}, {date:rowData.date}, {id: rowData._id}]} />
+            <ModalWashing 
+               data={[
+                  { timeSend: rowData.timeSend },
+                  { timeTake: rowData.timeTake }, 
+                  { dateSend: rowData.dateSend }, 
+                  { dateTake: rowData.dateTake },
+                  { id: rowData._id}
+               ]} 
+            />
          </>
        )},
    ]);
-   const [data, setData] = useState([]);
-   const [dataStaff, setDataStaff] = useState({
-      arrs: []
-   })
-   
+
+
    return (
       <div>
          {/* <button onClick={()=>console.log(dataStaff.arrs)}>aaaaaaa</button> */}
          <MaterialTable
-         title="Quản lý Dịch vụ Nấu ăn"
+         title="Giặt ủi"
          icons={tableIcons}
          columns={columns}
          data={data}
@@ -156,4 +151,4 @@ const tableIcons = {
  }
 
 
- export default CookingOrder;
+ export default WashingOrder;

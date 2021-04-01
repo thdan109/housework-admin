@@ -4,7 +4,7 @@ import Axios from 'axios';
 import '../styles/ModalAssignment.css'
 import { Checkbox } from '@material-ui/core';
 
-const ModalAssignment = ( props ) =>{
+const ModalClear = ( props ) =>{
    const {
       buttonLabel,
       className
@@ -29,7 +29,7 @@ const ModalAssignment = ( props ) =>{
       console.log(e.target.value);
       const id =  e.target.value;
       const datatime = props.data
-      Axios.post('http://localhost:216/cooking/addStaff',{
+      Axios.post('http://localhost:216/clear/addStaff',{
          id: id,
          dttime: datatime
       })
@@ -86,4 +86,4 @@ const ModalAssignment = ( props ) =>{
       </div>
    )
 }
-export default ModalAssignment
+export default ModalClear

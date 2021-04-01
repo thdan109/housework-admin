@@ -1,10 +1,10 @@
 import React from 'react'
 import  { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Axios from 'axios';
-import '../styles/ModalAssignment.css'
+import '../../styles/ModalAssignment.css'
 import { Checkbox } from '@material-ui/core';
 
-const ModalAssignment = ( props ) =>{
+const ModalWashing = ( props ) =>{
    const {
       buttonLabel,
       className
@@ -29,7 +29,8 @@ const ModalAssignment = ( props ) =>{
       console.log(e.target.value);
       const id =  e.target.value;
       const datatime = props.data
-      Axios.post('http://localhost:216/cooking/addStaff',{
+      console.log(datatime);
+      Axios.post('http://localhost:216/washing/addStaff',{
          id: id,
          dttime: datatime
       })
@@ -41,9 +42,11 @@ const ModalAssignment = ( props ) =>{
    const getDataStaff = () =>{
       console.log('aaa')
       const data = props.data
-      Axios.post('http://localhost:216/staff/statusStaff', {
+      console.log(data);
+      Axios.post('http://localhost:216/staff/statusStaffWash', {
          dttime: data
-      }).then(res =>{
+      })
+      .then(res =>{
          setState(res.data)
       })
    }
@@ -86,4 +89,4 @@ const ModalAssignment = ( props ) =>{
       </div>
    )
 }
-export default ModalAssignment
+export default ModalWashing
