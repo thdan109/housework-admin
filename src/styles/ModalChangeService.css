@@ -1,0 +1,19 @@
+.Containertable{
+   margin: 0;
+   width: 100%;
+}
+.table{
+   margin: auto;
+}
+
+.divContainerInput{
+   margin-top: 20px;
+}
+.TitleName{
+   font-size: 13px;
+   color: gray;
+   font-weight: 400;
+}
+.Input{
+   height: 45px;
+}

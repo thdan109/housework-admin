@@ -18,6 +18,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useEffect } from 'react';
+import ModalChangeService from './modals/ModalChangeService'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -42,27 +43,35 @@ const tableIcons = {
 
   const  ServiceManagement = () => {
    useEffect(()=>{
-      // getDataStaff()
+      getDataStaff()
    },[])
 
 
-   const getDataStaff = () =>{
-      console.log('GetDataStaff');
-      Axios.get('http://localhost:216/staff/dataStaff').then(res =>{
+   const getDataStaff = async() =>{
+      console.log('GetDataService');
+      Axios.get('http://localhost:216/service/dataService').then(res =>{
          setData(res.data)
       })
    }
    const  [columns, setColumns] = useState([
-     { title: 'Tên dịch vụ', field: 'nameService' },
-     { title: 'Mô tả dịch vụ', field: 'descriptionService'},
-     { title: 'Giá dịch vụ', field: 'prince' },
+      { title: 'Tên dịch vụ', field: 'nameService' },
+      { title: 'Mô tả dịch vụ', field: 'descriptionService'},
+      { title: 'Giá dịch vụ', field: 'prince', render: rowData=>(
+         rowData.prince.map(dt => <p>{dt}</p> )
+      )},
+      { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
+         <>
+            <ModalChangeService data={{id: rowData._id}} />
+         </>
+      )},
    ]);
    
    const [data, setData] = useState([]);
  
    return (
-      
-   <MaterialTable
+   <div>
+      <button onClick={()=>console.log(data)}>aaaaaaaaaaaaaaaa</button>
+      <MaterialTable
       classn
       title="Quản lý Dịch vụ"
       icons={tableIcons}
@@ -80,35 +89,38 @@ const tableIcons = {
              }, 1000)
             
            }),
-         onRowUpdate: (newData, oldData) =>
-           new Promise((resolve, reject) => {
-             setTimeout(() => {
-               const dataUpdate = [...data];
-               const index = oldData.tableData.id;
-               dataUpdate[index] = newData;
-               setData([...dataUpdate]);
-                  Axios.post('http://localhost:216/service/updatedataService',
-                     newData
-                  )
-               resolve();
-             }, 1000)
-           }),
-           onRowDelete: oldData =>
-           new Promise((resolve, reject) => {
-               setTimeout(() => {
-                   const dataDelete = [...data];
-                   const index = oldData.tableData.id;
-                   dataDelete.splice(index, 1);
-                   setData([...dataDelete]);
-                     const idStaff = oldData._id;
-                     // Axios.get('http://localhost:216/staff/delStaff/id='+idStaff).then(res =>{
-                     //    // getDataStaff()
-                     // })
-                   resolve();
-               }, 1000);
-           })
+         // onRowUpdate: (newData, oldData) =>
+         //   new Promise((resolve, reject) => {
+         //     setTimeout(() => {
+         //       const dataUpdate = [...data];
+         //       const index = oldData.tableData.id;
+         //       dataUpdate[index] = newData;
+         //       setData([...dataUpdate]);
+         //          Axios.post('http://localhost:216/service/updatedataService',
+         //             newData
+         //          )
+         //       resolve();
+         //     }, 1000)
+         //   }),
+         //   onRowDelete: oldData =>
+         //   new Promise((resolve, reject) => {
+         //       setTimeout(() => {
+         //           const dataDelete = [...data];
+         //           const index = oldData.tableData.id;
+         //           dataDelete.splice(index, 1);
+         //           setData([...dataDelete]);
+         //             const idService = oldData._id;
+         //             Axios.get('http://localhost:216/service/delService/id='+idService).then(res =>{
+         //                // getDataStaff()
+         //             })
+         //           resolve();
+         //       }, 1000);
+         //   })
          }}
      />
+   </div>
+   
+     
    )
  }
 

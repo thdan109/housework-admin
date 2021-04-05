@@ -23,20 +23,20 @@ const ModalAssignment = ( props ) =>{
    },[])
 
    const [idStaff, setIDStaff] = React.useState([])
-   const [checked, setChecked] = React.useState({checked: true})
+   const [checked, setChecked] = React.useState()
 
-   const ClickAdd = (e) =>{
-      console.log(e.target.value);
-      const id =  e.target.value;
-      const datatime = props.data
-      Axios.post('http://localhost:216/cooking/addStaff',{
-         id: id,
-         dttime: datatime
-      })
-      // getDataStaff()
-      toggle()
-      window.location.reload(1)
-   }
+   // const ClickAdd = (e) =>{
+   //    console.log(e.target.value);
+   //    const id =  e.target.value;
+   //    const datatime = props.data
+   //    Axios.post('http://localhost:216/cooking/addStaff',{
+   //       id: id,
+   //       dttime: datatime
+   //    })
+   //    // getDataStaff()
+   //    toggle()
+   //    window.location.reload(1)
+   // }
 
    const getDataStaff = () =>{
       console.log('aaa')
@@ -48,6 +48,21 @@ const ModalAssignment = ( props ) =>{
       })
    }
 
+   const handleChange = ( e ) =>{
+      if (e.target.id){
+         setChecked({...checked, [e.target.id]: e.target.checked})
+      }
+   }
+
+   const Send =  (e) =>{
+      Axios.post('http://localhost:216/cooking/addStaff',{
+         dataStaff: checked,
+         data: props.data
+      })
+      toggle()
+      window.location.reload(1)
+   }
+ 
    return (
       <div>
 
@@ -67,7 +82,9 @@ const ModalAssignment = ( props ) =>{
                         state.map(dt=>(
                            <tr>
                               <td style={{textAlign: 'center'}}>
-                                 <button style={{border: 0}} onClick={(e)=>ClickAdd(e)} value={dt._id}>Chọn</button>
+                                 {/* <button style={{border: 0}} onClick={(e)=>ClickAdd(e)} value={dt._id}>Chọn</button> */}
+                                 <input type='checkbox' id={dt._id}  value={dt._id} onChange={(e) => handleChange(e)} 
+                                 />
                               </td>
                               <td>{dt._id}</td>
                               <td>{dt.fullnameStaff}</td>
@@ -79,7 +96,7 @@ const ModalAssignment = ( props ) =>{
                </div>
             </ModalBody>
             <ModalFooter>
-               {/* <Button color="primary" onClick={toggle}>Chọn</Button>{' '} */}
+               <Button color="primary" onClick={(e)=>Send(e)}>Chọn</Button>{' '}
                <Button color="secondary" onClick={()=>toggle()}>Trở lại</Button>
             </ModalFooter>
          </Modal>
