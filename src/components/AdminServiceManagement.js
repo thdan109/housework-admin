@@ -1,6 +1,8 @@
 import React, { useState, forwardRef } from 'react';
 import Axios from 'axios';
 
+
+
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -19,6 +21,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useEffect } from 'react';
 import ModalChangeService from './modals/ModalChangeService'
+import ModalAddService from './modals/ModalAddService'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -53,13 +56,21 @@ const tableIcons = {
          setData(res.data)
       })
    }
+   
    const  [columns, setColumns] = useState([
+      // { title: 'Action', render: rowData =>(
+      //    <>   
+      //       <ModalAddService/>
+      //    </>
+      //    )
+      // },
+      { title: 'Id dịch vụ', field: '_id' },
       { title: 'Tên dịch vụ', field: 'nameService' },
       { title: 'Mô tả dịch vụ', field: 'descriptionService'},
       { title: 'Giá dịch vụ', field: 'prince', render: rowData=>(
          rowData.prince.map(dt => <p>{dt}</p> )
       )},
-      { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
+      { title: '', field: 'dataStaff.arrs',render: rowData => (
          <>
             <ModalChangeService data={{id: rowData._id}} />
          </>
@@ -70,25 +81,25 @@ const tableIcons = {
  
    return (
    <div>
-      <button onClick={()=>console.log(data)}>aaaaaaaaaaaaaaaa</button>
+      {/* <button onClick={()=>console.log(data)}>aaaaaaaaaaaaaaaa</button> */}
+      <ModalAddService />
       <MaterialTable
-      classn
       title="Quản lý Dịch vụ"
       icons={tableIcons}
       columns={columns}
       data={data}
       editable={{
-      onRowAdd: newData =>
-           new Promise((resolve, reject) => {
-             setTimeout(() => {
-               setData([...data, newData]);
-               Axios.post('http://localhost:216/service/addService', 
-                  newData
-               )
-               resolve();
-             }, 1000)
+      // onRowAdd: newData =>
+      //      new Promise((resolve, reject) => {
+      //        setTimeout(() => {
+      //          setData([...data, newData]);
+      //          Axios.post('http://localhost:216/service/addService', 
+      //             newData
+      //          )
+      //          resolve();
+      //        }, 1000)
             
-           }),
+      //      }),
          // onRowUpdate: (newData, oldData) =>
          //   new Promise((resolve, reject) => {
          //     setTimeout(() => {
@@ -119,8 +130,6 @@ const tableIcons = {
          }}
      />
    </div>
-   
-     
    )
  }
 

@@ -1,11 +1,20 @@
+.header{
+   overflow: hidden;
+   background-color: #f1f1f1;
+   /* padding: 20px 10px; */
+}
+
 /* .test{
    border: 1px solid black;
    float: right;
    width: 80%;
 } */
+.divMenu{
+   
+}
 .btnMenu{
-   margin-top: 30px;
-   margin-left: 50px;
+  
+   margin-left: 30px;
    padding: 5px 40px;
    background-color: #DCDCDC;
    border: 2px solid black;
