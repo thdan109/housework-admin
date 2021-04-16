@@ -18,6 +18,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useEffect } from 'react';
+import ModalAddStaff from './modals/ModalAddStaff'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -55,65 +56,73 @@ const tableIcons = {
    const  [columns, setColumns] = useState([
      { title: 'Họ và Tên', field: 'fullnameStaff' },
      { title: 'Tên đăng nhập', field: 'usernameStaff'},
-     { title: 'Mật khẩu', field: 'passwordStaff' },
+   //   { title: 'Mật khẩu', field: 'passwordStaff' },
      { title: 'Ngày sinh', field: 'birthdayStaff', type: 'date'},
+     { title: 'Số điện thoại', field: 'numberPhone', type: 'numberic'},
      { title: 'Địa chỉ', field: 'addressStaff'},
      { title: 'Số CMND', field: 'IDCardStaff'},
      { title: 'Giới tính', field: 'sex'},
      { title: "Nơi sinh", field: 'birthPlace'},
+     { title: 'Bộ phận',  field: 'department'},
      { title: 'Ngày tham gia',  field: 'joinDay', type: 'date'}
    ]);
    
    const [data, setData] = useState([]);
+
+   const addStaff = () =>{
+      console.log('aaaaaaa');
+   }
  
    return (
-      
-     <MaterialTable
-       title="Quản lý Nhân sự"
-       icons={tableIcons}
-       columns={columns}
-       data={data}
-       editable={{
-         onRowAdd: newData =>
-           new Promise((resolve, reject) => {
-             setTimeout(() => {
-               setData([...data, newData]);
-               Axios.post('http://localhost:216/staff/addStaff', 
-                  newData
-               )
-               resolve();
-             }, 1000)
-            
-           }),
-         onRowUpdate: (newData, oldData) =>
-           new Promise((resolve, reject) => {
-             setTimeout(() => {
-               const dataUpdate = [...data];
-               const index = oldData.tableData.id;
-               dataUpdate[index] = newData;
-               setData([...dataUpdate]);
-                  Axios.post('http://localhost:216/staff/updatedataStaff',
-                     newData
-                  )
-               resolve();
-             }, 1000)
-           }),
-           onRowDelete: oldData =>
-           new Promise((resolve, reject) => {
-               setTimeout(() => {
-                   const dataDelete = [...data];
-                   const index = oldData.tableData.id;
-                   dataDelete.splice(index, 1);
-                   setData([...dataDelete]);
-                     const idStaff = oldData._id;
-                     Axios.get('http://localhost:216/staff/delStaff/id='+idStaff).then(res =>{
-                        // getDataStaff()
-                     })
-                   resolve();
-               }, 1000);
-           })
-         }}
-     />
+      <div>
+         <ModalAddStaff  />
+         <MaterialTable
+            title="Quản lý Nhân sự"
+            icons={tableIcons}
+            columns={columns}
+            data={data}
+            editable={{
+               // onRowAdd: newData =>
+               //   new Promise((resolve, reject) => {
+               //     setTimeout(() => {
+               //       setData([...data, newData]);
+               //       Axios.post('http://localhost:216/staff/addStaff', 
+               //          newData
+               //       )
+               //       resolve();
+               //     }, 1000)
+                  
+               //   }),
+               onRowUpdate: (newData, oldData) =>
+               new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                     const dataUpdate = [...data];
+                     const index = oldData.tableData.id;
+                     dataUpdate[index] = newData;
+                     setData([...dataUpdate]);
+                        Axios.post('http://localhost:216/staff/updatedataStaff',
+                           newData
+                        )
+                     resolve();
+                  }, 1000)
+               }),
+               onRowDelete: oldData =>
+               new Promise((resolve, reject) => {
+                     setTimeout(() => {
+                        const dataDelete = [...data];
+                        const index = oldData.tableData.id;
+                        dataDelete.splice(index, 1);
+                        setData([...dataDelete]);
+                           const idStaff = oldData._id;
+                           Axios.get('http://localhost:216/staff/delStaff/id='+idStaff).then(res =>{
+                              // getDataStaff()
+                           })
+                        resolve();
+                     }, 1000);
+               })
+               }}
+         />
+      </div>
    )
  }
 
