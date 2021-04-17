@@ -66,17 +66,19 @@ import ModalClear from './ModalClear'
       },
       { title: 'Thời gian', field: 'timeStart'},
       { title: 'Ngày', field: 'date', type: 'date'},
-      // { title: 'Trạng thái', field: 'status', render: rowData => (
-      //    <>
-      //        <select style={{ borderWidth:  0, fontSize: 14}}>
-      //          <option>Đang chờ</option>
-      //          <option>Xác nhận</option>
-      //        </select>
-      //        {/* <input type="checkbox"/> */}
-      //    </>
-      //  )},
+      
       { title: 'Địa chỉ', field: 'address' },
       { title: 'Tổng tiền',  field: 'money'},
+      { title: 'Trạng thái', field: 'status', render: rowData => (
+         <>
+             <select style={{ borderWidth:  0, fontSize: 14}}>
+               <option>{rowData.status}</option>
+               <option>Đang chờ</option>
+               <option>Xác nhận</option>
+             </select>
+             {/* <input type="checkbox"/> */}
+         </>
+       )},
       { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
          <>
             <ModalClear data={[{time:rowData.timeStart}, {date:rowData.date}, {id: rowData._id}]} />

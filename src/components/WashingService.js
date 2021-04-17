@@ -67,15 +67,16 @@ import ModalWashing from './modals/ModalWashing'
             rowData.staff.map((dt)=> <p>{dt}</p>)
       },
       { title: 'Ghi chú', field: 'note'},
-      // { title: 'Trạng thái', field: 'status', render: rowData => (
-      //    <>
-      //        <select style={{ borderWidth:  0, fontSize: 14}}>
-      //          <option>Đang chờ</option>
-      //          <option>Xác nhận</option>
-      //        </select>
-      //        {/* <input type="checkbox"/> */}
-      //    </>
-      //  )},
+      { title: 'Trạng thái', field: 'status', render: rowData => (
+         <>
+             <select style={{ borderWidth:  0, fontSize: 14}}>
+               <option>{rowData.status}</option>
+               <option>Đang chờ</option>
+               <option>Xác nhận</option>
+             </select>
+             {/* <input type="checkbox"/> */}
+         </>
+       )},
       { title: 'Địa chỉ', field: 'address' },
       { title: 'Tổng tiền',  field: 'money'},
       { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
