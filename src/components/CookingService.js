@@ -62,6 +62,18 @@ const tableIcons = {
    //       setDataStaff({arrs: res.data})
    //    })
    // }
+   const handleChangeStatus = async(e) =>{
+      const status = e.target.value
+      const id = e.target[e.target.selectedIndex].id
+      const data = await Axios.post('http://localhost:216/cooking/changeStatus',{
+         id: id,
+         status : status 
+      })
+      // getData()
+      if (data.data.notifi === "Oke"){
+         getDataOrder()
+      }
+   }
    
 
    const  [columns, setColumns] = useState([
@@ -81,12 +93,12 @@ const tableIcons = {
       { title: 'Tổng tiền',  field: 'money'},
       { title: 'Trạng thái', field: 'status', render: rowData => (
          <>
-             <select style={{ borderWidth:  0, fontSize: 14}}>
+             <select onChange={(e)=>handleChangeStatus(e)} style={{ borderWidth:  0, fontSize: 14}}>
                <option>{rowData.status}</option>
-               <option>Đang chờ</option>
-               <option>Xác nhận</option>
+               <option id={rowData._id} value="0">Xác nhận</option>
+               <option id={rowData._id} value="1">Đang thực hiện</option>
+               {/* <option id={rowData._id} value="2">Đã thanh toán</option> */}
              </select>
-             {/* <input type="checkbox"/> */}
          </>
        )},
       { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (

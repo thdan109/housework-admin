@@ -41,7 +41,7 @@ const ModalAssignment = ( props ) =>{
    const getDataStaff = () =>{
       console.log('aaa')
       const data = props.data
-      Axios.post('http://localhost:216/staff/statusStaff', {
+      Axios.post('http://localhost:216/staff/statusStaffCooking', {
          dttime: data
       }).then(res =>{
          setState(res.data)

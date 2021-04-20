@@ -55,6 +55,18 @@ import ModalWashing from './modals/ModalWashing'
       setData(data.data)
    }
 
+   const handleChangeStatus = async(e) =>{
+      const status = e.target.value
+      const id = e.target[e.target.selectedIndex].id
+      const data = await Axios.post('http://localhost:216/washing/changeStatus',{
+         id: id,
+         status : status 
+      })
+      // getData()
+      if (data.data.notifi === "Oke"){
+         getData()
+      }
+   }
    const  [columns, setColumns] = useState([
       { title: "ID đơn", field: '_id'},
       { title: 'Tên KH', field: 'fullname' },
@@ -69,12 +81,14 @@ import ModalWashing from './modals/ModalWashing'
       { title: 'Ghi chú', field: 'note'},
       { title: 'Trạng thái', field: 'status', render: rowData => (
          <>
-             <select style={{ borderWidth:  0, fontSize: 14}}>
+             <select onChange={(e)=>handleChangeStatus(e)} style={{ borderWidth:  0, fontSize: 14}}>
                <option>{rowData.status}</option>
-               <option>Đang chờ</option>
-               <option>Xác nhận</option>
+               {/* <option id={rowData._id} value="0">Đang chờ xác nhận</option> */}
+               <option id={rowData._id} value="0">Đã Xác nhận</option>
+               <option id={rowData._id} value="2">Đã đến</option>
+               <option id={rowData._id} value="1">Đang thực hiện</option>
+               {/* <option id={rowData._id} value="2">Đã thanh toán</option> */}
              </select>
-             {/* <input type="checkbox"/> */}
          </>
        )},
       { title: 'Địa chỉ', field: 'address' },

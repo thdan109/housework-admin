@@ -40,7 +40,7 @@ const ModalWashing = ( props ) =>{
    // }
 
    const getDataStaff = () =>{
-      console.log('aaa')
+      // console.log('aaa')b
       const data = props.data
       console.log(data);
       Axios.post('http://localhost:216/staff/statusStaffWash', {
