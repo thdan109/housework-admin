@@ -101,7 +101,9 @@ import ModalWashing from './modals/ModalWashing'
                   { timeTake: rowData.timeTake }, 
                   { dateSend: rowData.dateSend }, 
                   { dateTake: rowData.dateTake },
-                  { id: rowData._id}
+                  { idUser: rowData.idUser},
+                  { id: rowData._id},
+                  
                ]} 
             />
          </>

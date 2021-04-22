@@ -87,7 +87,7 @@ const tableIcons = {
          rowData.staff.map((dt)=> <p>{dt}</p>)
       },
       { title: 'Đi chợ', field: 'goMarket'},
-      { title: 'Thời gian', field: 'time'},
+      { title: 'Thời gian', field: 'timeStart'},
       { title: 'Ngày', field: 'date', type: 'date'},
       { title: 'Địa chỉ', field: 'address' },
       { title: 'Tổng tiền',  field: 'money'},
@@ -103,7 +103,7 @@ const tableIcons = {
        )},
       { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
          <>
-            <ModalAssignment data={[{time:rowData.time}, {date:rowData.date}, {id: rowData._id}]} />
+            <ModalAssignment data={[{time:rowData.time}, {date:rowData.date}, {idUser: rowData.idUser}, {id: rowData._id}]} />
          </>
        )},
    ]);

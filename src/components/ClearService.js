@@ -90,7 +90,7 @@ import axios from 'axios';
        )},
       { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
          <>
-            <ModalClear data={[{time:rowData.timeStart}, {date:rowData.date}, {id: rowData._id}]} />
+            <ModalClear data={[{time:rowData.timeStart}, {date:rowData.date}, {id: rowData._id}, {idUser: rowData.idUser}]} />
          </>
        )},
    ]);
