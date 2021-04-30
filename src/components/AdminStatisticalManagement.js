@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/OrderAdmin.css'
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -6,12 +7,11 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
-import OrderScreen from './CookingService'
-import ClearScreen from './ClearService'
-import WashingComponent from './WashingService'
 
-import '../styles/OrderAdmin.css'
 
+import WashingSave from './WashingSaveService'
+import CookingSave from './CookingSaveService'
+import ClearSave from './ClearSaveService'
 
 const useStyles = makeStyles((theme) => ({
    formControl: {
@@ -23,9 +23,11 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-const AdminOrder = () =>{
 
-   
+
+
+const AdminStatistical = () =>{
+
    const [state, setState] = React.useState({
       order: '',
       name: 'hai',
@@ -40,8 +42,8 @@ const AdminOrder = () =>{
    const handleChange = (event) => {
       const name = event.target.name;
       setState({
-        ...state,
-        [name]: event.target.value,
+      ...state,
+      [name]: event.target.value,
       });
       const option_val = event.target.value
       if (option_val == 1){
@@ -73,6 +75,7 @@ const AdminOrder = () =>{
             farm: true
          })
    }
+   
 
 
    return(
@@ -96,9 +99,7 @@ const AdminOrder = () =>{
                >
                   <option value={1}>Nấu ăn</option>
                   <option value={2}>Dọn dẹp nhà</option>
-                  <option value={3}>Giặt ủi</option>
-                  {/* <option value={4}>--------</option> */}
-                  
+                  <option value={3}>Giặt ủi</option>                  
                </NativeSelect>
                {/* <FormHelperText>Label + placeholder</FormHelperText> */}
             </FormControl>
@@ -106,21 +107,17 @@ const AdminOrder = () =>{
       
          <div className='ContainerTable'>
             {
-               
                (type.cooking === true)?
-                  <OrderScreen /> 
+                  <CookingSave />
                :           
                (type.housework == true)?
                   // <div>a2</div>
-                  <ClearScreen />
+                  <ClearSave />
                :
                (type.washing === true)?
-                  <WashingComponent/>
-               :
-               // (type.farm === true)?
-               // <div>a4</div>
-               // : 
-               <div>kcj</div>
+                  <WashingSave/>
+               : 
+               <div></div>
             }
          </div>
 
@@ -129,6 +126,9 @@ const AdminOrder = () =>{
 
       </div>
    )
+
+
+
 }
 
-export default AdminOrder
+export default  AdminStatistical

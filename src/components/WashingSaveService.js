@@ -50,7 +50,7 @@ import ModalWashing from './modals/ModalWashing'
    const [data, setData] = useState([]);
    
    const getData = async() =>{
-      const data = await Axios.get('http://localhost:216/washing/getData')
+      const data = await Axios.get('http://localhost:216/washingsave/dataSaveWashing')
       // console.log(data.data);
       setData(data.data)
    }
@@ -74,39 +74,9 @@ import ModalWashing from './modals/ModalWashing'
       { title: 'Giờ gửi', field: 'timeSend'},
       { title: "Ngày nhận", field: 'dateTake', type: 'date'},
       { title: 'Giờ nhận', field: 'timeTake'},
-      { title: 'Nhân viên', field: 'staff' ,
-         render: rowData=>
-            rowData.staff.map((dt)=> <p>{dt}</p>)
-      },
       { title: 'Ghi chú', field: 'note'},
-      { title: 'Trạng thái', field: 'status', render: rowData => (
-         <>
-             <select onChange={(e)=>handleChangeStatus(e)} style={{ borderWidth:  0, fontSize: 14}}>
-               <option>{rowData.status}</option>
-               {/* <option id={rowData._id} value="0">Đang chờ xác nhận</option> */}
-               <option id={rowData._id} value="0">Đã Xác nhận</option>
-               <option id={rowData._id} value="2">Đã đến</option>
-               <option id={rowData._id} value="1">Đang thực hiện</option>
-               {/* <option id={rowData._id} value="2">Đã thanh toán</option> */}
-             </select>
-         </>
-       )},
       { title: 'Địa chỉ', field: 'address' },
       { title: 'Tổng tiền',  field: 'money'},
-      { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
-         <>
-            <ModalWashing 
-               data={[
-                  { timeSend: rowData.timeSend },
-                  { timeTake: rowData.timeTake }, 
-                  { dateSend: rowData.dateSend }, 
-                  { dateTake: rowData.dateTake },
-                  { idUser: rowData.idUser},
-                  { id: rowData._id},                 
-               ]} 
-            />
-         </>
-       )},
    ]);
 
 

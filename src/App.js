@@ -9,6 +9,7 @@ import StaffManagement from './components/StaffManangent';
 import CustomerManagement from './components/CustomerManagement';
 import ServiceManagement from './components/AdminServiceManagement';
 import OrderManagement from './components/AdminOrderManagement'
+import SaveOrderManagement from './components/AdminStatisticalManagement'
 import MyComponent from './components/FeedbackAdmin'
 
 
@@ -37,6 +38,7 @@ const  App = () => {
                <Route path='/admin/customers' component={CustomerManagement} /> 
                <Route path='/admin/services' component={ServiceManagement} />  
                <Route path='/admin/orders' component={OrderManagement} />
+               <Route path='/admin/saveorders' component={SaveOrderManagement} /> 
                <Route path='/admin/feedbacks' component={MyComponent} />
             </div>    
               

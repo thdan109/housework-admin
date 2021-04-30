@@ -1,6 +1,7 @@
 .header{
    overflow: hidden;
-   background-color: #f1f1f1;
+   background-color: #2E8B57;
+   display: inline;
    /* padding: 20px 10px; */
 }
 
@@ -10,7 +11,14 @@
    width: 80%;
 } */
 .divMenu{
-   
+   /* display: inline; */
+   background-color: #2E8B57;
+   border: 1px solid;
+   width: "100%";
+}
+.divInfor{
+   margin-right: 20px;
+   margin-top: 10px;
 }
 .btnMenu{
   
@@ -48,9 +56,11 @@
 }
 .Link{
    text-decoration: none;
+   color: black
 }
 .Link:hover{
    text-decoration: none;
+   color: black;
 }
 .logout-link{
    text-decoration: none;
@@ -60,5 +70,42 @@
    text-decoration: none;
    color: black;
 }
+.divContainer{
+   width: "10%";
 
+}
 
+.dropbtn {
+   background-color: #4CAF50;
+   color: white;
+   padding: 16px;
+   font-size: 16px;
+   border: none;
+ }
+ 
+ .dropdown {
+   position: relative;
+   display: inline-block;
+ }
+ 
+ .dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #f1f1f1;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+ }
+ 
+ .dropdown-content a {
+   color: black;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+ }
+ 
+ .dropdown-content a:hover {background-color: #ddd;}
+ 
+ .dropdown:hover .dropdown-content {display: block;}
+ 
+ .dropdown:hover .dropbtn {background-color: #3e8e41;}

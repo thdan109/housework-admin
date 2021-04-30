@@ -40,17 +40,19 @@
    /* float: left;
 } */ 
 .RightAdmin{
-   width: 95%;
+   width: 98%;
    margin: auto;
-   margin-top: 2%;
+   margin-top: 2%;  
 
 }
 .ContainerApp{
    width: 100%;
    margin: 0;
-   background-color: #DCDCDC;
    height: 100%;
-   position: absolute;
-   left: 0;
+   min-height: 100vh;
+   background-color: #DCDCDC;
+   /* height: 100vh; */
+   /* position: absolute; */
+  
    overflow: hidden;
 }

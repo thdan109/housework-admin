@@ -86,6 +86,10 @@ const ModalChangeService = ( props ) =>{
                         <Input placeholder="" className='Input' id='nameService' onChange={(e)=>handleChangeText(e)} /> 
                      </div>
                      <div className='divContainerInput'>
+                        <div className='TitleName'>Loại dịch vụ</div>
+                        <Input placeholder="" className='Input' id='type' onChange={(e)=>handleChangeText(e)} /> 
+                     </div>
+                     <div className='divContainerInput'>
                         <Label className='TitleName'>Mô tả</Label>
                         <Input type="textarea" placeholder="" style={{ height: 100 }} id='discription' onChange={(e)=>handleChangeText(e)} /> 
                      </div>

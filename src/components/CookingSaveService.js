@@ -51,7 +51,7 @@ const tableIcons = {
 
 
    const getDataOrder = () =>{
-      Axios.get('http://localhost:216/cooking/dataCooking').then(res =>{
+      Axios.get('http://localhost:216/cookingsave/dataCooking').then(res =>{
          setData(res.data)  
       })  
    }
@@ -71,39 +71,17 @@ const tableIcons = {
 
    const  [columns, setColumns] = useState([
       { title: "ID đơn", field: '_id'},
+      { title: "ID công việc", field: 'idWork'},
       { title: 'Tên KH', field: 'fullname' },
       { title: "Số người ăn", field: 'number'},
       { title: 'Món ăn', field: 'dishList', render: rowData =>
          rowData.dishList.map((dt, index)=> <p>{dt}</p>)
-      },
-      { title: 'Nhân viên' , field: 'staff', render: rowData=>
-         rowData.staff.map((dt)=> <p>{dt}</p>)
       },
       { title: 'Đi chợ', field: 'goMarket'},
       { title: 'Thời gian', field: 'timeStart'},
       { title: 'Ngày', field: 'date', type: 'date'},
       { title: 'Địa chỉ', field: 'address' },
       { title: 'Tổng tiền',  field: 'money'},
-      { title: 'Trạng thái', field: 'status', render: rowData => (
-         <>
-             <select onChange={(e)=>handleChangeStatus(e)} style={{ borderWidth:  0, fontSize: 14}}>
-               <option>{rowData.status}</option>
-               <option id={rowData._id} value="0">Xác nhận</option>
-               <option id={rowData._id} value="1">Đang thực hiện</option>
-               {/* <option id={rowData._id} value="2">Đã thanh toán</option> */}
-             </select>
-         </>
-       )},
-      { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
-         <>
-            <ModalAssignment data={[{time:rowData.timeStart}, {date:rowData.date}, {idUser: rowData.idUser}, {id: rowData._id}]} />
-         </>
-       )},
-      //  { title: 'Xử lý', field: 'dataStaff.arrs',render: rowData => (
-      //    <>
-      //       <AddBox style={{color: 'blue'}} onClick={( ) => submitSave(rowData._id)} />
-      //    </>
-      //  )},
    ]);
    const [data, setData] = useState([]);
    const [dataStaff, setDataStaff] = useState({
@@ -114,7 +92,7 @@ const tableIcons = {
       <div>
          {/* <button onClick={()=>console.log(dataStaff.arrs)}>aaaaaaa</button> */}
          <MaterialTable
-         title="Quản lý Dịch vụ Nấu ăn"
+         title="Nấu ăn"
          icons={tableIcons}
          columns={columns}
          data={data}

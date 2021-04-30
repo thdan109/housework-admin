@@ -36,6 +36,9 @@ const BrowserHeaderAdmin = (props) => {
                      <Link to="/admin/orders" className="LinkMenu">Quản lý Công việc</Link>
                   </NavLink>
                   <NavLink className='NavLinkMenuAdmin'>
+                     <Link to="/admin/saveorders" className="LinkMenu">Việc đã lưu</Link>
+                  </NavLink>
+                  <NavLink className='NavLinkMenuAdmin'>
                      <Link to="/admin/feedbacks" className="LinkMenu">Quản lý Phản hồi</Link>
                   </NavLink>
                   <NavLink className='NavLinkMenuAdmin'>
@@ -44,7 +47,7 @@ const BrowserHeaderAdmin = (props) => {
                   <NavLink className='NavLinkMenuAdmin'>
                      <Link to="/admin/statistic" className="LinkMenu">Thống kê</Link>
                   </NavLink>
-                  <div className='ContainerInfor' >
+                  {/* <div className='ContainerInfor' >
                      <div>
                         <NavLink className='inforAd'>
                            Tên: {Cookies.get('NameAdmin')} <br/>
@@ -58,7 +61,7 @@ const BrowserHeaderAdmin = (props) => {
                            <Link className='logout-link'>Đăng xuất</Link>
                         </NavLink> 
                      </div>
-                  </div>
+                  </div> */}
                </div>
             </div>                   
             <div className='TableMaterial'>

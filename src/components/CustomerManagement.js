@@ -1,5 +1,6 @@
 import React, { useState, forwardRef } from 'react';
 import Axios from 'axios';
+import '../styles/CustomerManager.css'
 
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
@@ -66,54 +67,59 @@ const tableIcons = {
    const [data, setData] = useState([]);
  
    return (
-      
-     <MaterialTable
-       title="Quản lý Khách Hàng"
-       icons={tableIcons}
-       columns={columns}
-       data={data}
-       editable={{
-         // onRowAdd: newData =>
-         //   new Promise((resolve, reject) => {
-         //     setTimeout(() => {
-         //       setData([...data, newData]);
-         //       // Axios.post('http://localhost:216/staff/addStaff', 
-         //       //    newData
-         //       // )
-         //       resolve();
-         //     }, 1000)
-            
-         //   }),
-         // onRowUpdate: (newData, oldData) =>
-         //   new Promise((resolve, reject) => {
-         //     setTimeout(() => {
-         //       const dataUpdate = [...data];
-         //       const index = oldData.tableData.id;
-         //       dataUpdate[index] = newData;
-         //       setData([...dataUpdate]);
-         //          // Axios.post('http://localhost:216/staff/updatedataStaff',
-         //          //    newData
-         //          // )
-         //       resolve();
-         //     }, 1000)
-         //   }),
-           onRowDelete: oldData =>
-           new Promise((resolve, reject) => {
-               setTimeout(() => {
-                   const dataDelete = [...data];
-                   const index = oldData.tableData.id;
-                   dataDelete.splice(index, 1);
-                   setData([...dataDelete]);
-                     const idUSer = oldData._id;
-                     Axios.get('http://localhost:216/user/delUser/id='+idUSer).then(res =>{
-                        // getDataStaff()
-                     })
-                   resolve();
-               }, 1000);
-           })
-         }}
-     />
+      <div className='TableCustomer'>
+         <div className='Table'>
+         <MaterialTable
+            title="Quản lý Khách Hàng"
+            icons={tableIcons}
+            columns={columns}
+            data={data}
+            editable={{
+               // onRowAdd: newData =>
+               //   new Promise((resolve, reject) => {
+               //     setTimeout(() => {
+               //       setData([...data, newData]);
+               //       // Axios.post('http://localhost:216/staff/addStaff', 
+               //       //    newData
+               //       // )
+               //       resolve();
+               //     }, 1000)
+                  
+               //   }),
+               // onRowUpdate: (newData, oldData) =>
+               //   new Promise((resolve, reject) => {
+               //     setTimeout(() => {
+               //       const dataUpdate = [...data];
+               //       const index = oldData.tableData.id;
+               //       dataUpdate[index] = newData;
+               //       setData([...dataUpdate]);
+               //          // Axios.post('http://localhost:216/staff/updatedataStaff',
+               //          //    newData
+               //          // )
+               //       resolve();
+               //     }, 1000)
+               //   }),
+               onRowDelete: oldData =>
+               new Promise((resolve, reject) => {
+                     setTimeout(() => {
+                        const dataDelete = [...data];
+                        const index = oldData.tableData.id;
+                        dataDelete.splice(index, 1);
+                        setData([...dataDelete]);
+                           const idUSer = oldData._id;
+                           Axios.get('http://localhost:216/user/delUser/id='+idUSer).then(res =>{
+                              // getDataStaff()
+                           })
+                        resolve();
+                     }, 1000);
+               })
+               }}
+         />
+         </div>
+         
+      </div>
    )
+  
  }
 
 
