@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 import '../styles/test.css';
 import MenuIcon from '@material-ui/icons/Apps';
 import {Link} from 'react-router-dom'
-import {HomeWorkSharp, PersonPinSharp, AccessibilitySharp, WorkSharp, FeedbackSharp, ChatSharp,EqualizerSharp, Info } from '@material-ui/icons'
+import {HomeWorkSharp, PersonPinSharp, AccessibilitySharp, WorkSharp, FeedbackSharp, AssignmentTurnedInSharp,EqualizerSharp, ReportProblem , MonetizationOn} from '@material-ui/icons'
 import Cookies from 'js-cookie';
 
 const useStyles = makeStyles({
@@ -71,9 +71,10 @@ export default function SwipeableTemporaryDrawer(props) {
                   ['Quản lý Nhân viên',"/admin/staffs", <PersonPinSharp style={{ color: '#043927' }}/>], 
                   ['Quản lý Khách hàng',"/admin/customers",<AccessibilitySharp style={{ color: '#043927' }}/>], 
                   ['Quản lý Công việc',"/admin/orders", <WorkSharp style={{ color: '#043927' }}/>],
-                  ['Việc đã hoàn thành',"/admin/saveorders", <WorkSharp style={{ color: '#043927' }}/>],
+                  ['Việc đã hoàn thành',"/admin/saveorders", <AssignmentTurnedInSharp style={{ color: '#043927' }}/>],
                   ['Quản lý Phản hồi',"/admin/feedbacks", <FeedbackSharp style={{ color: '#043927' }}/>],
-                  ['Trò chuyện trực tiếp',"/admin/chat",<ChatSharp style={{ color: '#043927' }}/>],
+                  ['Quản lý Báo cáo',"/admin/reports", <ReportProblem style={{ color: '#043927' }}/>],
+                  ['Lương nhân viên',"/admin/salary",<MonetizationOn style={{ color: '#043927' }}/>],
                   ['Thống kê',"/admin/statistic", <EqualizerSharp style={{ color: '#043927' }}/>]].map(([text,link,icon], index) => (
                    <Link className='Link' to={link}>
                      <ListItem button key={text}>

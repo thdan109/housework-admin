@@ -11,7 +11,9 @@ import ServiceManagement from './components/AdminServiceManagement';
 import OrderManagement from './components/AdminOrderManagement'
 import SaveOrderManagement from './components/AdminStatisticalManagement'
 import MyComponent from './components/FeedbackAdmin'
-
+import Feedback from './components/FeedbackFromCustomer'
+import Report from './components/ReportStaff'
+import Salary from './components/SalaryStaff'
 
 import Test from './components/test';
 import Cookies from 'js-cookie';
@@ -39,7 +41,9 @@ const  App = () => {
                <Route path='/admin/services' component={ServiceManagement} />  
                <Route path='/admin/orders' component={OrderManagement} />
                <Route path='/admin/saveorders' component={SaveOrderManagement} /> 
-               <Route path='/admin/feedbacks' component={MyComponent} />
+               <Route path='/admin/feedbacks' component={Feedback} />
+               <Route path='/admin/reports' component={Report} />
+               <Route path='/admin/salary' component={Salary} />
             </div>    
               
          </div>

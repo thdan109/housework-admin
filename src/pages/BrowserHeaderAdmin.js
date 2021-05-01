@@ -42,7 +42,7 @@ const BrowserHeaderAdmin = (props) => {
                      <Link to="/admin/feedbacks" className="LinkMenu">Quản lý Phản hồi</Link>
                   </NavLink>
                   <NavLink className='NavLinkMenuAdmin'>
-                     <Link to="/admin/chat" className="LinkMenu">Trò chuyện trực tiếp</Link>
+                     <Link to="/admin/salary" className="LinkMenu">Trò chuyện trực tiếp</Link>
                   </NavLink>
                   <NavLink className='NavLinkMenuAdmin'>
                      <Link to="/admin/statistic" className="LinkMenu">Thống kê</Link>
