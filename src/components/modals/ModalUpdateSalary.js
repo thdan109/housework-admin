@@ -54,27 +54,27 @@ const ModalUpdateSalary = ( props ) =>{
       })
    }
 
-   // const sendDataUpdateById = async( ) =>{
-   //    const id = props.data.id
-   //    const dataSendUpdate = dataUpdate
-   //    await axios.post('http://localhost:216/service/updataService',{
-   //       id : id,
-   //       data :dataSendUpdate
-   //    }).then(res =>{
-   //       if (res.data.Update === 'Oke'){
-   //          Swal.fire({
-   //             position: 'top',
-   //             icon: 'success',
-   //             title: 'Đã Cập nhật!',
-   //             showConfirmButton: false,
-   //             timer: 1500
-   //        }).then(()=>window.location.reload())
-          
-   //       }
-   //    })
+   const sendDataUpdateById = async( ) =>{
+      const id = props.id
+      const dataSendUpdate = dataUpdate
+      // console.log(dataSendUpdate);
+      await axios.post('http://localhost:216/salary/updateSalary',{
+         id : id,
+         data :dataSendUpdate
+      }).then(res =>{
+         if (res.data.Update === 'Update salary successfully!'){
+            Swal.fire({
+               position: 'top',
+               icon: 'success',
+               title: 'Đã Cập nhật!',
+               showConfirmButton: false,
+               timer: 1500
+          }).then(()=>window.location.reload())
+         }
+      })
       
       
-   // }
+   }
 
    return (
       <div>
@@ -92,29 +92,20 @@ const ModalUpdateSalary = ( props ) =>{
                      <div>
                         <div className='divContainerInput'>
                            <Label className='TitleName'>Chỉ tiêu việc/tháng</Label>
-                           <Input placeholder={dataSalary.work} id='nameService' onChange={(val) => handleChange(val)}  className='Input'/> 
+                           <Input placeholder={dataSalary.target} id='target' onChange={(val) => handleChange(val)}  className='Input'/> 
                         </div>
                         <div className='divContainerInput'>
-                           <Label className='TitleName'>1 việc nhận</Label>
-                           <Input placeholder={dataSalary.target} id='description' onChange={(val) => handleChange(val)}   /> 
+                           <Label className='TitleName'>Lương trên việc</Label>
+                           <Input placeholder={dataSalary.work} id='work' onChange={(val) => handleChange(val)}   /> 
                         </div>
                         <div className='divContainerInput'>
-                           <Label className='TitleName'>Việc nhận thêm</Label>
-                           <Input placeholder={dataSalary.bonus} id='description' onChange={(val) => handleChange(val)}  /> 
+                           <Label className='TitleName'>Việc vượt chỉ tiêu</Label>
+                           <Input placeholder={dataSalary.bonus} id='bonus' onChange={(val) => handleChange(val)}  /> 
                         </div>
                         <div className='divContainerInput'>
                            <Label className='TitleName'>Nghỉ</Label>
-                           <Input placeholder={dataSalary.absent} id='description' onChange={(val) => handleChange(val)} /> 
+                           <Input placeholder={dataSalary.absent} id='absent' onChange={(val) => handleChange(val)} /> 
                         </div>
-                        {/* {
-                           (state.prince) &&
-                           state.prince.map((dt,index) =>
-                              <div className='divContainerInput'>
-                                 <Label className='TitleName'>Chỉ tiêu : giá</Label>
-                                 <Input placeholder={dt} id={index+1} onChange={(val) => handleChange(val)}  className='Input'/> 
-                              </div>   
-                           )
-                        } */}
                      </div>
                      ))
                   }
@@ -124,8 +115,8 @@ const ModalUpdateSalary = ( props ) =>{
             <ModalFooter>
                <Button color="primary" 
                   onClick={()=>{
-                     // toggle()
-                     // sendDataUpdateById()
+                     toggle()
+                     sendDataUpdateById()
                }}>Đồng ý</Button>
                <Button color="secondary" onClick={()=>toggle()}>Trở lại</Button>
                {/* <Button color="primary" onClick={()=>console.log(dataUpdate)}>Đồng ý</Button> */}

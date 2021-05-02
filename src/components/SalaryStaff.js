@@ -1,6 +1,6 @@
 import React, { useState, forwardRef } from 'react';
 import Axios from 'axios';
-import { Table , List} from 'reactstrap';
+import { Table , List, Button, Card, Col} from 'reactstrap';
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -20,6 +20,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useEffect } from 'react';
 import ModalUpdate from './modals/ModalUpdateSalary'
 import '../styles/SalaryStaff.css'
+import Swal from 'sweetalert2'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -41,9 +42,6 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
 
-
-
-
   const  SalaryStaff = ( props ) => {
 
    useEffect(()=>{
@@ -64,11 +62,38 @@ const tableIcons = {
       })
    }
 
+   const count = async() =>{
+      await Axios.post('http://localhost:216/salary/countSalary',{
+         request: 'Oke'
+      }).then(result =>{
+         if (result.data.status==='Create Salary Successfully!'){
+            Swal.fire({
+               position: 'top',
+               icon: 'success',
+               title: 'Đã tính!',
+               showConfirmButton: false,
+               timer: 1500
+          }).then(()=>window.location.reload())
+         }else{
+            Swal.fire({
+               icon: 'error',
+               title: 'Fail...',
+               text: 'Lương chưa được tính!',
+               // footer: '<a href>Why do I have this issue?</a>'
+             }).then(()=>window.location.reload())
+         }
+      }).catch(err=>{
+
+      })
+   }
+
    const  [columns, setColumns] = useState([
-      { title: "ID đơn", field: 'idWork'},
-      { title: 'Tên KH', field: 'nameUser' },
-      { title: 'Điểm', field: 'rate' },
-      { title: 'Nội dung',  field: 'contentfeedback'},
+      { title: "ID Nhân viên", field: 'idStaff'},
+      { title: 'Tên Nhân viên', field: 'nameStaff' },
+      { title: 'Bộ phận', field: 'department' },
+      { title: 'Nghỉ', field: 'absent' },
+      { title: 'Việc', field: 'work' },
+      { title: 'Tổng nhận',  field: 'salary',type:'currency', currencySetting:{ locale: 'vi',currencyCode:'VND', minimumFractionDigits:0, maximumFractionDigits:2}},
    ]);
    const [data, setData] = useState([]);
    const [dataSalary, setDataSalary] = useState([]);
@@ -77,27 +102,38 @@ const tableIcons = {
    return (
       <div>
          <div className='dicription'>
-            
-            <List type="unstyled">
-               <li>Qui ước tính lương
-                  {
-                     dataSalary.map(dt =>(
-                     <ul>
-                        <li>1 việc bằng: {dt.work}</li>
-                        <li>1 việc vượt chỉ tiêu: {dt.bonus}</li>
-                        <li>Nghỉ: {dt.absent} </li>
-                        <li>Tổng: việc + việc vượt chỉ tiêu - nghỉ - phạt </li>
-                     </ul>
-                     ))
-                  }
-                  
-               </li>
-               {/* <li>Faucibus porta lacus fringilla vel</li> */}
-            </List>
-            <button >Tính lương</button>
-            <ModalUpdate />
-
+         {
+            dataSalary.map(dt =>(
+            <>
+               <div>
+                  <Col sm="3">
+                     <Card>
+                     <List type="unstyled">
+                        <li>Qui ước tính lương 
+                        
+                              <ul>
+                                 <li>Chỉ tiêu trên tháng: {dt.target} việc</li>
+                                 <li>1 việc bằng: {dt.work} VNĐ</li>
+                                 <li>1 việc vượt chỉ tiêu: {dt.bonus} * 150000</li>
+                                 <li>Nghỉ: {dt.absent} * 150000</li>
+                                 <li>Tổng: việc + việc vượt chỉ tiêu - nghỉ - phạt </li>
+                              </ul>
+                        </li>
+                     </List>
+                        <div style={{ margin: "auto", marginBottom: '10px'}}>
+                           <ModalUpdate id = { dt._id } /> 
+                        </div>
+                     </Card>
+                  </Col>
+               </div>
+            </>
+            ))
+         }
          </div>
+         <div style={{marginBottom: '10px'}}>
+            <Button onClick={()=>count() } color="danger" >Tính lương</Button>
+         </div>
+           
          <MaterialTable
          title="Lương nhân viên"
          icons={tableIcons}

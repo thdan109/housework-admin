@@ -125,19 +125,6 @@ export default function SwipeableTemporaryDrawer(props) {
                   <div className="divContainer"  >
                      <Menu style={{ fontSize: 45, color: 'white'}} onClick={toggleDrawer(anchor, true)}/> 
                      <div className="divInfor">
-                     
-                        {/* <Dropdown  isOpen={dropdownOpen} toggle={toggle}>
-                           <DropdownToggle caret>
-                              <span style={{fontWeight: 'bold'}}>ADMIN</span> 
-                           </DropdownToggle>
-                           <DropdownMenu>
-                              <DropdownItem header>Header</DropdownItem>
-                              <DropdownItem style={{backgroundColor: '#DCDCDC'}} ><span style={{fontWeight: 'bold', }}>Tên</span><span style={{float: 'right'}}>{Cookies.get('NameAdmin')}</span></DropdownItem>
-                              <DropdownItem style={{backgroundColor: '#D3D3D3'}}><span style={{fontWeight: 'bold'}}>Chức vụ</span><span style={{float: 'right'}}>{Cookies.get('Position')}</span></DropdownItem>
-                              <DropdownItem style={{backgroundColor: '#DCDCDC'}}>Đăng xuất</DropdownItem>   
-                              
-                           </DropdownMenu>
-                        </Dropdown> */}
                         <UncontrolledDropdown setActiveFromChild>
                            <DropdownToggle tag="a" className="nav-link" caret>
                                  <span style={{fontWeight: 'bold',color: "white"}}>ADMIN</span> 
@@ -149,11 +136,7 @@ export default function SwipeableTemporaryDrawer(props) {
                            </DropdownMenu>
                         </UncontrolledDropdown>
                      </div>
-
                   </div>
-                 
-                     
-               
                </div>
                
 

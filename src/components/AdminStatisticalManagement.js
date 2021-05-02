@@ -7,7 +7,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
-
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import classnames from 'classnames';
 
 import WashingSave from './WashingSaveService'
 import CookingSave from './CookingSaveService'
@@ -27,7 +28,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 const AdminStatistical = () =>{
+   const [activeTab, setActiveTab] = React.useState('1');
 
+   const toggle = tab => {
+      if(activeTab !== tab) setActiveTab(tab);
+   }
    const [state, setState] = React.useState({
       order: '',
       name: 'hai',
@@ -80,46 +85,59 @@ const AdminStatistical = () =>{
 
    return(
       <div className="ContainerAdminOrder">
-         <h2></h2>
-         <div className='OptionOrder'>
-            
-            <FormControl className={classes.formControl}>
-               <InputLabel shrink htmlFor="age-native-label-placeholder" >
-                 Chọn dịch vụ
-               </InputLabel>
-               <NativeSelect
-                  style={{fontSize: 18}}
-                  className='options'
-                  value={state.order}
-                  onChange={handleChange}
-                  inputProps={{
-                     name: 'order',
-                     id: 'age-native-label-placeholder',
-                  }}
-               >
-                  <option value={1}>Nấu ăn</option>
-                  <option value={2}>Dọn dẹp nhà</option>
-                  <option value={3}>Giặt ủi</option>                  
-               </NativeSelect>
-               {/* <FormHelperText>Label + placeholder</FormHelperText> */}
-            </FormControl>
-         </div>
-      
-         <div className='ContainerTable'>
-            {
-               (type.cooking === true)?
-                  <CookingSave />
-               :           
-               (type.housework == true)?
-                  // <div>a2</div>
-                  <ClearSave />
-               :
-               (type.washing === true)?
-                  <WashingSave/>
-               : 
-               <div></div>
-            }
-         </div>
+          <Nav tabs>
+               <NavItem>
+                  <NavLink
+                     className={classnames({ active: activeTab === '1' })}
+                     onClick={() => { toggle('1'); }}
+                  >
+                     Nấu ăn
+                  </NavLink>
+               </NavItem>
+               <NavItem>
+                  <NavLink
+                     className={classnames({ active: activeTab === '2' })}
+                     onClick={() => { toggle('2'); }}
+                  >
+                     Dọn nhà
+                  </NavLink>
+               </NavItem>
+               <NavItem>
+                  <NavLink
+                     className={classnames({ active: activeTab === '3' })}
+                     onClick={() => { toggle('3'); }}
+                  >
+                     Giặt ủi
+                  </NavLink>
+               </NavItem>
+            </Nav>
+            <TabContent activeTab={activeTab}>
+               <TabPane tabId="1">
+                  <Row>
+                     <Col >
+                        <Card>
+                           <ClearSave />
+                        </Card>
+                     </Col>
+                  </Row>
+               </TabPane>
+               <TabPane tabId="2">
+                  <Card>
+                     <CookingSave />
+                  </Card>
+                     
+               </TabPane>
+               <TabPane tabId="3">
+                  <Row>
+                     <Col>
+                        <Card>
+                          <WashingSave/>
+                        </Card>
+                     </Col>
+                    
+                  </Row>
+               </TabPane>
+            </TabContent>
 
 
 
