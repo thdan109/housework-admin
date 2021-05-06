@@ -1,5 +1,6 @@
 import React, { useState, forwardRef } from 'react';
 import Axios from 'axios';
+import ReactStars from "react-rating-stars-component";
 
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
@@ -63,6 +64,10 @@ import axios from 'axios';
          getData()
       }
    }
+
+   const ratingChanged = (newRating) => {
+      console.log(newRating);
+   };
 
    const  [columns, setColumns] = useState([
       { title: "ID đơn", field: '_id'},
