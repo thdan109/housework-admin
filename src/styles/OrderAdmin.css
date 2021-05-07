@@ -18,3 +18,9 @@
 .divInfor{
    float: right;
 }
+.navtab{
+   width: 270px;
+   /* color: white; */
+   text-align: center;
+   margin-right: 5px;
+}

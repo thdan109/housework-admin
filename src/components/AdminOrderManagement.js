@@ -116,24 +116,50 @@ const AdminOrder = () =>{
       
          <div className='ContainerTable'>
             <Nav tabs>
-               <NavItem>
+               <NavItem className="navtab" >
                   <NavLink
+                     style={{
+                        // background: '#FF6347'
+                        borderTop: '2px solid red',
+                        borderLeft: '2px solid red',
+                        borderRight: '2px solid red',
+                        fontWeight: 'bold',
+                        fontSize: 18
+                     }}
                      className={classnames({ active: activeTab === '1' })}
                      onClick={() => { toggle('1'); }}
                   >
+                     {/* <Button>Nấu ăn</Button> */}
                      Nấu ăn
                   </NavLink>
                </NavItem>
-               <NavItem>
+               <NavItem className="navtab">
                   <NavLink
+                     style={{
+                        // background: '#FF6347'
+                        borderTop: '2px solid orange',
+                        borderLeft: '2px solid orange',
+                        borderRight: '2px solid orange',
+                        fontWeight: 'bold',
+                        fontSize: 18
+                     }}
                      className={classnames({ active: activeTab === '2' })}
                      onClick={() => { toggle('2'); }}
                   >
+                     {/* <Button>Dọn nhà</Button> */}
                      Dọn nhà
                   </NavLink>
                </NavItem>
-               <NavItem>
+               <NavItem className="navtab" >
                   <NavLink
+                     style={{
+                        // background: '#FF6347'
+                        borderTop: '2px solid green',
+                        borderLeft: '2px solid green',
+                        borderRight: '2px solid green',
+                        fontWeight: 'bold',
+                        fontSize: 18
+                     }}
                      className={classnames({ active: activeTab === '3' })}
                      onClick={() => { toggle('3'); }}
                   >
@@ -142,22 +168,22 @@ const AdminOrder = () =>{
                </NavItem>
             </Nav>
             <TabContent activeTab={activeTab}>
-               <TabPane tabId="1">
-                  <Row>
+               <TabPane style={{borderLeft: '2px solid red'}} tabId="1">
+                  <Row >
                      <Col >
-                        <Card>
-                           <OrderScreen /> 
+                        <Card >
+                           <OrderScreen  /> 
                         </Card>
                      </Col>
                   </Row>
                </TabPane>
-               <TabPane tabId="2">
+               <TabPane style={{borderLeft: '2px solid orange'}} tabId="2">
                   <Card>
                      <ClearScreen /> 
                   </Card>
                      
                </TabPane>
-               <TabPane tabId="3">
+               <TabPane style={{borderLeft: '2px solid green'}} tabId="3">
                   <Row>
                      <Col>
                         <Card>

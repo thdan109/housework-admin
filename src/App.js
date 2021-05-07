@@ -14,6 +14,8 @@ import MyComponent from './components/FeedbackAdmin'
 import Feedback from './components/FeedbackFromCustomer'
 import Report from './components/ReportStaff'
 import Salary from './components/SalaryStaff'
+import LeaveStaff from './components/LeaveStaff'
+import Statistical from './components/Statistical'
 
 import Test from './components/test';
 import Cookies from 'js-cookie';
@@ -44,6 +46,8 @@ const  App = () => {
                <Route path='/admin/feedbacks' component={Feedback} />
                <Route path='/admin/reports' component={Report} />
                <Route path='/admin/salary' component={Salary} />
+               <Route path='/admin/leavestaff' component={LeaveStaff} />
+               <Route path='/admin/statistic' component={Statistical} />
             </div>    
               
          </div>

@@ -16,7 +16,18 @@ import { useHistory } from "react-router-dom";
 import '../styles/test.css';
 import MenuIcon from '@material-ui/icons/Apps';
 import {Link} from 'react-router-dom'
-import {HomeWorkSharp, PersonPinSharp, AccessibilitySharp, WorkSharp, FeedbackSharp, AssignmentTurnedInSharp,EqualizerSharp, ReportProblem , MonetizationOn} from '@material-ui/icons'
+import {
+   HomeWorkSharp, 
+   PersonPinSharp, 
+   AccessibilitySharp, 
+   WorkSharp, 
+   FeedbackSharp, 
+   AssignmentTurnedInSharp,
+   EqualizerSharp, 
+   ReportProblem , 
+   MonetizationOn,
+   AccessAlarm
+} from '@material-ui/icons'
 import Cookies from 'js-cookie';
 
 const useStyles = makeStyles({
@@ -50,8 +61,6 @@ export default function SwipeableTemporaryDrawer(props) {
       Cookies.remove('IdAdmin');
       history.push("/admin"); 
       window.location.reload(1);
-     
-      
    }
 
    const list = (anchor) => (
@@ -64,7 +73,13 @@ export default function SwipeableTemporaryDrawer(props) {
          onKeyDown={toggleDrawer(anchor, false)}
          style={{backgroundColor: '#DCDCDC', height: '100%'}}
       >
-     
+
+      <List>
+         <div style={{height: '45px', background: '#DCDCDC'}}>
+
+         </div>
+      </List>
+      <Divider />
 
       <List style={{}}>    
                {  [['Quản lý dịch vụ',"/admin/services",<HomeWorkSharp style={{ color: '#043927' }}/>], 
@@ -72,6 +87,7 @@ export default function SwipeableTemporaryDrawer(props) {
                   ['Quản lý Khách hàng',"/admin/customers",<AccessibilitySharp style={{ color: '#043927' }}/>], 
                   ['Quản lý Công việc',"/admin/orders", <WorkSharp style={{ color: '#043927' }}/>],
                   ['Việc đã hoàn thành',"/admin/saveorders", <AssignmentTurnedInSharp style={{ color: '#043927' }}/>],
+                  ['Nghỉ phép',"/admin/leavestaff", <AccessAlarm style={{ color: '#043927' }}/>],
                   ['Quản lý Phản hồi',"/admin/feedbacks", <FeedbackSharp style={{ color: '#043927' }}/>],
                   ['Quản lý Báo cáo',"/admin/reports", <ReportProblem style={{ color: '#043927' }}/>],
                   ['Lương nhân viên',"/admin/salary",<MonetizationOn style={{ color: '#043927' }}/>],
