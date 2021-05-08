@@ -16,6 +16,7 @@ import Report from './components/ReportStaff'
 import Salary from './components/SalaryStaff'
 import LeaveStaff from './components/LeaveStaff'
 import Statistical from './components/Statistical'
+import VoucherManagement from './components/VoucherManagement'
 
 import Test from './components/test';
 import Cookies from 'js-cookie';
@@ -48,6 +49,7 @@ const  App = () => {
                <Route path='/admin/salary' component={Salary} />
                <Route path='/admin/leavestaff' component={LeaveStaff} />
                <Route path='/admin/statistic' component={Statistical} />
+               <Route path='/admin/vouchers' component={VoucherManagement} />
             </div>    
               
          </div>

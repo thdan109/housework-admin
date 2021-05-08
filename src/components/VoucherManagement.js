@@ -48,56 +48,22 @@ import {
       ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
    };
 
-  const  LeaveStaff = ( props ) => {
+  const  VoucherManagement = ( props ) => {
 
    useEffect(()=>{
-      getDataFeedback();
-      // getDataStaff();
+     getDataVoucher()
    },[])
 
-   const getDataFeedback = async() =>{
-      await Axios.get('http://localhost:216/leave/getData').then(res =>{
+   const getDataVoucher = async() =>{
+      await Axios.get('http://localhost:216/voucher/dataVoucherAdmin').then(res =>{
          setData(res.data)
       })
-     
    }
-   const ratingChanged = () => {
-      console.log(data.rate);
-   };
-
-   const handleStatus = async( e,id,idStaff ) =>{
-      const status = e.target.value 
-      console.log(status);
-      await Axios.post('http://localhost:216/leave/acceptLeave',{
-         status: status,
-         idLeave: id,
-         idStaff: idStaff
-      }).then(result=>{
-         if (result.data.complete === 'Oke')
-         getDataFeedback()
-      }).catch(err=>{
-
-      })
-      
-   }
-
 
    const  [columns, setColumns] = useState([
-      // { title: "ID đơn", field: 'idWork'},
-      { title: 'Tên NV', field: 'nameStaff' },
-      { title: 'Bộ phận', field: 'department' },
-      { title: 'Ngày nghỉ', field: 'date', type: 'date' },
-      { title: 'Lý do', field: 'reason' },
-      { title: 'Trạng thái', field: 'status',render: rowData =>(
-         <>
-              <Input onChange={(e)=> handleStatus(e, rowData._id, rowData.idStaff) } type="select" name="select" id="exampleSelect"  >
-                  <option >{rowData.status}</option>
-                  <option value="0">Không chấp thuận</option>
-                  <option value="1">Xác nhận</option>
-               </Input>
-         </>
-      ) },
-      { title: 'Nội dung',  field: 'contentfeedback'},
+      { title: 'Tên Voucher', field: 'nameVoucher' },
+      { title: 'Mã Voucher', field: 'codeVoucher' },
+      { title: 'Mệnh giá', field: 'prince' }
    ]);
    const [data, setData] = useState([]);
    
@@ -106,21 +72,21 @@ import {
       <div>
          {/* <button onClick={()=>console.log(dataStaff.arrs)}>aaaaaaa</button> */}
          <MaterialTable
-         title="Nghỉ phép"
+         title="Quản lý Khuyến mãi"
          icons={tableIcons}
          columns={columns}
          data={data}
          editable={{
-            // onRowAdd: newData =>
-            //   new Promise((resolve, reject) => {
-            //     setTimeout(() => {
-            //       setData([...data, newData]);
-            //       Axios.post('http://localhost:216/staff/addStaff', 
-            //          newData
-            //       )
-            //       resolve();
-            //     }, 1000)
-            //   }),
+            onRowAdd: newData =>
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  setData([...data, newData]);
+                  Axios.post('http://localhost:216/voucher/addVoucher', 
+                     newData
+                  )
+                  resolve();
+                }, 1000)
+              }),
 
             // onRowUpdate: (newData, oldData) =>
             // new Promise((resolve, reject) => {
@@ -136,20 +102,20 @@ import {
             //    }, 1000)
             // }),
 
-            //   onRowDelete: oldData =>
-            //   new Promise((resolve, reject) => {
-            //       setTimeout(() => {
-            //           const dataDelete = [...data];
-            //           const index = oldData.tableData.id;
-            //           dataDelete.splice(index, 1);
-            //           setData([...dataDelete]);
-            //             const idStaff = oldData._id;
-            //             Axios.get('http://localhost:216/staff/delStaff/id='+idStaff).then(res =>{
-            //                // getDataStaff()
-            //             })
-            //           resolve();
-            //       }, 1000);
-            //   })
+              onRowDelete: oldData =>
+              new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                      const dataDelete = [...data];
+                      const index = oldData.tableData.id;
+                      dataDelete.splice(index, 1);
+                      setData([...dataDelete]);
+                        const idStaff = oldData._id;
+                        Axios.get('http://localhost:216/voucher/delVoucher/id='+idStaff).then(res =>{
+                           // getDataStaff()
+                        })
+                      resolve();
+                  }, 1000);
+              })
             }}
          />
          
@@ -158,4 +124,4 @@ import {
    )
  }
 
- export default LeaveStaff;
+ export default VoucherManagement;

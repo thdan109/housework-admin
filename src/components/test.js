@@ -11,6 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import StarsIcon from '@material-ui/icons/Stars'
 import Menu from '@material-ui/icons/Menu'
 import { useHistory } from "react-router-dom";
 import '../styles/test.css';
@@ -87,6 +88,7 @@ export default function SwipeableTemporaryDrawer(props) {
                   ['Quản lý Khách hàng',"/admin/customers",<AccessibilitySharp style={{ color: '#043927' }}/>], 
                   ['Quản lý Công việc',"/admin/orders", <WorkSharp style={{ color: '#043927' }}/>],
                   ['Việc đã hoàn thành',"/admin/saveorders", <AssignmentTurnedInSharp style={{ color: '#043927' }}/>],
+                  ['Quản lý Khuyến mãi',"/admin/vouchers", <StarsIcon style={{ color: '#043927' }}/>],
                   ['Nghỉ phép',"/admin/leavestaff", <AccessAlarm style={{ color: '#043927' }}/>],
                   ['Quản lý Phản hồi',"/admin/feedbacks", <FeedbackSharp style={{ color: '#043927' }}/>],
                   ['Quản lý Báo cáo',"/admin/reports", <ReportProblem style={{ color: '#043927' }}/>],
