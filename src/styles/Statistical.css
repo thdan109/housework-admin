@@ -1,0 +1,42 @@
+.wrapper{
+   display: grid;
+   /* background-color: white; */
+   grid-column-gap: 50px;
+   marginTop: 10px;
+   /* padding: 36px; */
+}
+.grid-div1{
+   /* border: 1px solid black; */
+   /* grid-row: 1 /2; */
+   /* align-self: center; */
+   /* padding: 80px; */
+   /* justify-content: center; */
+   margin: 100px;
+}
+.grid-div2{
+   /* border: 1px solid black; */
+   /* grid-row: 1 /2; */
+   /* align-self: center;
+   justify-content: center; */
+   margin: 100px;
+}
+.navtab{
+   width: 270px;
+   /* color: white; */
+   text-align: center;
+   margin-right: 5px;
+}
+.tiltle{
+   display: grid;
+   grid-row: 1;
+   justify-content: center;
+   margin-bottom: 20px;
+}
+.input-select{
+   /* border: 1px solid black; */
+   display: grid;
+   /* width:300px; */
+   justify-content: center;
+   margin-bottom: 60px;
+   /* border: 1px solid black */ 
+}

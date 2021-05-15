@@ -146,7 +146,6 @@ const AdminOrder = () =>{
                      className={classnames({ active: activeTab === '2' })}
                      onClick={() => { toggle('2'); }}
                   >
-                     {/* <Button>Dọn nhà</Button> */}
                      Dọn nhà
                   </NavLink>
                </NavItem>
