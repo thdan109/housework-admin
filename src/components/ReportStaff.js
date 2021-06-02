@@ -1,5 +1,6 @@
 import React, { useState, forwardRef } from 'react';
 import Axios from 'axios';
+import ReactStars from "react-rating-stars-component";
 
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
@@ -51,7 +52,7 @@ const tableIcons = {
 
 
    const getDataReport = async() =>{
-      await Axios.get('http://localhost:216/report/getData').then(res =>{
+      await Axios.get('http://localhost:216/reportStaff/getData').then(res =>{
          setData(res.data)
       })
      
@@ -59,8 +60,24 @@ const tableIcons = {
 
    const  [columns, setColumns] = useState([
       { title: "ID Nhân viên", field: 'idStaff'},
-      { title: 'ID Khách hàng', field: 'idUser' },
+      { title: 'Tên nhân viên', field: 'nameStaff' },
       { title: 'ID công việc', field: 'idWork' },
+      { title: 'Điểm', field: 'rating',render: rowData =>(
+         <>
+              <ReactStars
+                  count={5}
+                  value={rowData.rating}
+                  isHalf={true}
+                  // onChange={rowData.rate}
+                  size={36}
+                  edit={false}
+                  activeColor="#ffd700"
+               />
+         </>
+
+
+
+      ) },
       { title: 'Nội dung',  field: 'note'},
    ]);
    const [data, setData] = useState([]);
@@ -70,7 +87,7 @@ const tableIcons = {
       <div>
          {/* <button onClick={()=>console.log(dataStaff.arrs)}>aaaaaaa</button> */}
          <MaterialTable
-         title="Báo cáo nhân viên"
+         title="Đánh giá nhân viên"
          icons={tableIcons}
          columns={columns}
          data={data}

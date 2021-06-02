@@ -5,12 +5,34 @@
    position: absolute;
    left: 0;
    overflow: hidden;
-   
+   background-image: linear-gradient( green, blue);
+}
+.container-image{
+   float: left;
+   margin-top: 3%;
+   margin-left: 3%;
+   width: 30%;
+   height: 60%;
+   /* border: 1px solid black; */
+}
+.containerr{
+   border-radius: 40px;
+   margin: auto;
+   margin-top: 5%;
+   height: 80%;
+   width: 80%;
+   /* border: 1px solid black; */
+   background-color: white;
+}
+.image{
+   height: 640px;
+   width: 640px;
 }
 .LoginAdmin{
-   /* float: right; */
-   margin: auto;
+   float: right;
+   
    margin-top: 8%;
+   margin-right: 8%;
    /* border: 1px solid black; */
    width: 30%;
    height: 60%;

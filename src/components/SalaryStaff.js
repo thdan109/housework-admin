@@ -105,17 +105,17 @@ const tableIcons = {
          {
             dataSalary.map(dt =>(
             <>
-               <div>
+               <div  >
                   <Col sm="3">
-                     <Card>
+                     <Card className="tab">
                      <List type="unstyled">
                         <li>Qui ước tính lương 
                         
                               <ul>
                                  <li>Chỉ tiêu trên tháng: {dt.target} việc</li>
                                  <li>1 việc bằng: {dt.work} VNĐ</li>
-                                 <li>1 việc vượt chỉ tiêu: {dt.bonus} * 150000</li>
-                                 <li>Nghỉ: {dt.absent} * 150000</li>
+                                 <li>1 việc vượt chỉ tiêu: {dt.bonus} * {dt.work}</li>
+                                 <li>Nghỉ: {dt.absent} * {dt.work}</li>
                                  <li>Tổng: việc + việc vượt chỉ tiêu - nghỉ - phạt </li>
                               </ul>
                         </li>

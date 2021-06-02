@@ -1,6 +1,7 @@
 .header{
    overflow: hidden;
-   background-color: #2E8B57;
+   /* background-color: #2E8B57; */
+   background-color: #37474f;
    display: inline;
    /* padding: 20px 10px; */
 }
@@ -13,6 +14,7 @@
 .divMenu{
    /* display: inline; */
    background-color: #2E8B57;
+   background-color: #37474f;
    border: 1px solid;
    width: "100%";
 }

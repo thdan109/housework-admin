@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
 import { Button , TextField} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import {Media} from 'reactstrap'
 import Axios from 'axios';
+import image from '../assist/professional-cleaning-service-woman-cleaner-make-some-housework-professional-cleaning-service-woman-cleaner-make-some-housework-101114642.jpg'
 import Cookies from 'js-cookie';
 import  '../styles/LoginAdmin.css';
 
@@ -35,7 +37,14 @@ const LoginAdmin = (props) =>{
    return(
 
       <div className='ContainerLoginAdmin'>
+         <div className='containerr'>
+         {/* <div> */}
+         <div className='container-image'>
+            {/* <Media object data-src={"../../../express-server/public/images/professional-cleaning-service-woman-cleaner-make-some-housework-professional-cleaning-service-woman-cleaner-make-some-housework-101114642.jpg"} alt="Generic placeholder image" /> */}
+            <img src ={image} className="image" />
+         </div>
          <div className='LoginAdmin'>
+
             <div className='TitleLoginAdmin'>
                LOGIN
             </div>
@@ -51,6 +60,8 @@ const LoginAdmin = (props) =>{
                   {/* </div> */}
                </form>
          </div>
+         </div>
+         
       </div>
 
    )
