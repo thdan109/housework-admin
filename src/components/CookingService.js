@@ -1,5 +1,7 @@
 import React, { useState, forwardRef } from 'react';
 import Axios from 'axios';
+import {Button} from 'reactstrap'
+import Swal from 'sweetalert2'
 
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
@@ -56,6 +58,39 @@ const tableIcons = {
       })  
    }
 
+   const PushNotifi = async(val,val1) =>{
+      // console.log(val);
+      await Axios.post('http://localhost:216/user/pushNotifiCooking',{
+         id: val, idWork: val1
+      }).then(res =>{
+         if (res.data.status === 'Oke'){
+            Swal.fire({
+               position: 'top',
+               icon: 'success',
+               title: 'Thành công!',
+               showConfirmButton: false,
+               timer: 1500
+          }).then(()=>window.location.reload())
+         }else{
+            Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Lỗi!',
+            showConfirmButton: false,
+            timer: 1500
+       })
+         }
+      }).catch(err =>{
+      //    Swal.fire({
+      //       position: 'top',
+      //       icon: 'error',
+      //       title: 'Lỗi!',
+      //       showConfirmButton: false,
+      //       timer: 1500
+      //  })
+      })
+      
+   }
    const handleChangeStatus = async(e) =>{
       const status = e.target.value
       const id = e.target[e.target.selectedIndex].id
@@ -70,7 +105,7 @@ const tableIcons = {
    }
 
    const  [columns, setColumns] = useState([
-      { title: "ID đơn", field: '_id'},
+      // { title: "ID đơn", field: '_id'},
       { title: 'Tên KH', field: 'fullname' },
       { title: "Số người ăn", field: 'number'},
       { title: 'Món ăn', field: 'dishList', render: rowData =>
@@ -82,7 +117,20 @@ const tableIcons = {
       { title: 'Đi chợ', field: 'goMarket'},
       { title: 'Thời gian', field: 'timeStart'},
       { title: 'Ngày', field: 'date', type: 'date'},
-      { title: 'Địa chỉ', field: 'address' },
+      { title: 'Yêu cầu', field: 'reqStaff.fullnameStaff', 
+         render: rowData =>(
+           
+               !rowData.reqStaff ?
+               <>
+                  Không
+               </>
+               :
+               <>
+                  {rowData.reqStaff.fullnameStaff}
+               </>
+         )
+      },
+      { title: 'Địa chỉ', field: 'address', width : '30%' },
       { title: 'Tổng tiền',  field: 'money'},
       { title: 'Trạng thái', field: 'status', render: rowData => (
          <>
@@ -99,11 +147,17 @@ const tableIcons = {
             <ModalAssignment data={[{time:rowData.timeStart}, {date:rowData.date}, {idUser: rowData.idUser}, {id: rowData._id}]} />
          </>
        )},
-      //  { title: 'Xử lý', field: 'dataStaff.arrs',render: rowData => (
-      //    <>
-      //       <AddBox style={{color: 'blue'}} onClick={( ) => submitSave(rowData._id)} />
-      //    </>
-      //  )},
+       { title: 'Thông báo', field: 'username',render: rowData => (
+         <>
+         {
+            rowData.reqStaff?
+               <Button color="danger" onClick={()=>PushNotifi(rowData.idUser, rowData._id)} >Báo bận</Button>
+            :
+            <></>
+         }
+         </>
+       )},
+     
    ]);
    const [data, setData] = useState([]);
    const [dataStaff, setDataStaff] = useState({
@@ -118,6 +172,9 @@ const tableIcons = {
          icons={tableIcons}
          columns={columns}
          data={data}
+         options={{
+            tableLayout: "auto"
+         }}
          editable={{
             // onRowAdd: newData =>
             //   new Promise((resolve, reject) => {

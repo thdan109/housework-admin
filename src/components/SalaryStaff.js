@@ -114,6 +114,7 @@ const tableIcons = {
                               <ul>
                                  <li>Chỉ tiêu trên tháng: {dt.target} việc</li>
                                  <li>1 việc bằng: {dt.work} VNĐ</li>
+                                 <li>Lương: {dt.salary} VNĐ</li>
                                  <li>1 việc vượt chỉ tiêu: {dt.bonus} * {dt.work}</li>
                                  <li>Nghỉ: {dt.absent} * {dt.work}</li>
                                  <li>Tổng: việc + việc vượt chỉ tiêu - nghỉ - phạt </li>

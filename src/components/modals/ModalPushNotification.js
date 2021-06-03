@@ -1,10 +1,10 @@
 import React from 'react'
 import  { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Axios from 'axios';
-import '../styles/ModalAssignment.css'
+import '../../styles/ModalAssignment.css'
 import { Checkbox } from '@material-ui/core';
 
-const ModalClear = ( props ) =>{
+const ModalPushNoti = ( props ) =>{
    const {
       buttonLabel,
       className
@@ -66,13 +66,13 @@ const ModalClear = ( props ) =>{
    return (
       <div>
 
-         <Button color="primary" onClick={()=>toggle()}>Danh sách</Button>
-         <Modal isOpen={modal} toggle={toggle} className={className} size="lg">
-         <ModalHeader toggle={toggle}>Phân công nhân viên</ModalHeader>
+         <Button color="primary" onClick={()=>toggle()}>Thông báo</Button>
+         <Modal isOpen={modal} toggle={toggle} className={className} >
+         <ModalHeader toggle={toggle}>Thông báo</ModalHeader>
          {/* <Button color="primary" onClick={()=>console.log(idStaff)}>Danh sách</Button> */}
             <ModalBody>
                <div className="ContainerTable">
-                  <table border='1' className='table'>
+                  {/* <table border='1' className='table'>
                      <tr>
                         <th>Action</th>
                         <th>ID NV</th>
@@ -83,7 +83,7 @@ const ModalClear = ( props ) =>{
                         state.map(dt=>(
                            <tr>
                               <td style={{textAlign: 'center'}}>
-                                 {/* <button style={{border: 0}} onClick={(e)=>ClickAdd(e)} value={dt._id}>Chọn</button> */}
+                                
                                  <input type='checkbox' id={dt._id}  value={dt._id} onChange={(e) => handleChange(e)} 
                                  />
                               </td>
@@ -94,15 +94,24 @@ const ModalClear = ( props ) =>{
                         ))
                      }
                      
-                  </table>
+                  </table> */}
+                  <div>
+                     Đồng ý
+                     <Button color="success" onClick={()=>toggle()}>Gửi</Button>
+                  </div>
+                  <div>
+                     Đồng ý
+                     <Button color="danger">Không duyệt</Button>{' '}
+                  </div>
+
                </div>
             </ModalBody>
             <ModalFooter>
-               <Button color="primary" onClick={(e) => Send(e)}>Chọn</Button>
-               <Button color="secondary" onClick={()=>toggle()}>Trở lại</Button>
+               {/* <Button color="primary" onClick={(e) => Send(e)}>Chọn</Button> */}
+               <Button color="primary" onClick={()=>toggle()}>Đóng</Button>
             </ModalFooter>
          </Modal>
       </div>
    )
 }
-export default ModalClear
+export default ModalPushNoti

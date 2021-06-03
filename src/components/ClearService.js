@@ -1,6 +1,8 @@
 import React, { useState, forwardRef } from 'react';
 import Axios from 'axios';
 import ReactStars from "react-rating-stars-component";
+import { Button } from 'reactstrap';
+import Swal from 'sweetalert2'
 
 import MaterialTable from "material-table";
 import AddBox from '@material-ui/icons/AddBox';
@@ -21,6 +23,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useEffect } from 'react';
 import MyComponent from './getDataStaffFree'
 import ModalClear from './ModalClear'
+import ModalPush from './modals/ModalPushNotification'
 import axios from 'axios';
 
    const tableIcons = {
@@ -65,12 +68,56 @@ import axios from 'axios';
       }
    }
 
+   const PushNotifi = async(val,val1) =>{
+      // console.log(val);
+      await Axios.post('http://localhost:216/user/pushNotifiClear',{
+         id: val, idWork: val1
+      }).then(res =>{
+         if (res.data.status === 'Oke'){
+            Swal.fire({
+               position: 'top',
+               icon: 'success',
+               title: 'Thành công!',
+               showConfirmButton: false,
+               timer: 1500
+          }).then(()=>window.location.reload())
+         }else{
+            Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Lỗi!',
+            showConfirmButton: false,
+            timer: 1500
+       })
+         }
+      }).catch(err =>{
+      //    Swal.fire({
+      //       position: 'top',
+      //       icon: 'error',
+      //       title: 'Lỗi!',
+      //       showConfirmButton: false,
+      //       timer: 1500
+      //  })
+      })
+      
+   }
+
    const ratingChanged = (newRating) => {
       console.log(newRating);
    };
+   
 
    const  [columns, setColumns] = useState([
-      { title: "ID đơn", field: '_id'},
+      // { title: "ID đơn", field: '_id',
+      //    rowStyle: {
+      //       width: 20,
+      //       maxWidth: 20
+      // },
+        
+      //    headerStyle: {
+      //       width:20,
+      //       maxWidth: 20
+      //  }},
       { title: 'Tên KH', field: 'username' },
       { title: "Diện tích", field: 'area'},
       { title: 'Giờ làm', field: 'timeWork'},
@@ -80,8 +127,20 @@ import axios from 'axios';
       },
       { title: 'Thời gian', field: 'timeStart'},
       { title: 'Ngày', field: 'date', type: 'date'},
-      
-      { title: 'Địa chỉ', field: 'address' },
+      { title: 'Yêu cầu', field: 'reqStaff.fullnameStaff', 
+         render: rowData =>(
+           
+               !rowData.reqStaff ?
+               <>
+                  Không
+               </>
+               :
+               <>
+                  {rowData.reqStaff.fullnameStaff}
+               </>
+         )
+      },
+      { title: 'Địa chỉ', field: 'address', width:  '30%' },
       { title: 'Tổng tiền',  field: 'money'},
       { title: 'Trạng thái', field: 'status', render: rowData => (
          <>
@@ -98,6 +157,19 @@ import axios from 'axios';
             <ModalClear data={[{time:rowData.timeStart}, {date:rowData.date}, {id: rowData._id}, {idUser: rowData.idUser}]} />
          </>
        )},
+       { title: 'Thông báo', field: 'username',render: rowData => (
+         <>
+         {
+            rowData.reqStaff?
+               <Button color="danger" onClick={()=>PushNotifi(rowData.idUser, rowData._id)} >Báo bận</Button>
+            :
+            <></>
+         }
+            {/* <ModalPush data={[{time:rowData.timeStart}, {date:rowData.date}, {id: rowData._id}, {idUser: rowData.idUser}]} /> */}
+            
+         </>
+       )},
+       
    ]);
 
 
@@ -105,51 +177,54 @@ import axios from 'axios';
       <div>
          {/* <button onClick={()=>console.log(dataStaff.arrs)}>aaaaaaa</button> */}
          <MaterialTable
-         title="Quản lý Dịch vụ Dọn dẹp nhà"
-         icons={tableIcons}
-         columns={columns}
-         data={data}
-         editable={{
-            // onRowAdd: newData =>
-            //   new Promise((resolve, reject) => {
-            //     setTimeout(() => {
-            //       setData([...data, newData]);
-            //       Axios.post('http://localhost:216/staff/addStaff', 
-            //          newData
-            //       )
-            //       resolve();
-            //     }, 1000)
-            //   }),
-
-            // onRowUpdate: (newData, oldData) =>
-            // new Promise((resolve, reject) => {
-            //    setTimeout(() => {
-            //       const dataUpdate = [...data];
-            //       const index = oldData.tableData.id;
-            //       dataUpdate[index] = newData;
-            //       setData([...dataUpdate]);
-            //          Axios.post('http://localhost:216/staff/updatedataStaff',
-            //             newData
-            //          )
-            //       resolve();
-            //    }, 1000)
-            // }),
-
-            //   onRowDelete: oldData =>
-            //   new Promise((resolve, reject) => {
-            //       setTimeout(() => {
-            //           const dataDelete = [...data];
-            //           const index = oldData.tableData.id;
-            //           dataDelete.splice(index, 1);
-            //           setData([...dataDelete]);
-            //             const idStaff = oldData._id;
-            //             Axios.get('http://localhost:216/staff/delStaff/id='+idStaff).then(res =>{
-            //                // getDataStaff()
-            //             })
-            //           resolve();
-            //       }, 1000);
-            //   })
+            title="Quản lý Dịch vụ Dọn dẹp nhà"
+            icons={tableIcons}
+            columns={columns}
+            data={data}
+            options={{
+               tableLayout: "auto"
             }}
+            editable={{
+               // onRowAdd: newData =>
+               //   new Promise((resolve, reject) => {
+               //     setTimeout(() => {
+               //       setData([...data, newData]);
+               //       Axios.post('http://localhost:216/staff/addStaff', 
+               //          newData
+               //       )
+               //       resolve();
+               //     }, 1000)
+               //   }),
+
+               // onRowUpdate: (newData, oldData) =>
+               // new Promise((resolve, reject) => {
+               //    setTimeout(() => {
+               //       const dataUpdate = [...data];
+               //       const index = oldData.tableData.id;
+               //       dataUpdate[index] = newData;
+               //       setData([...dataUpdate]);
+               //          Axios.post('http://localhost:216/staff/updatedataStaff',
+               //             newData
+               //          )
+               //       resolve();
+               //    }, 1000)
+               // }),
+
+               //   onRowDelete: oldData =>
+               //   new Promise((resolve, reject) => {
+               //       setTimeout(() => {
+               //           const dataDelete = [...data];
+               //           const index = oldData.tableData.id;
+               //           dataDelete.splice(index, 1);
+               //           setData([...dataDelete]);
+               //             const idStaff = oldData._id;
+               //             Axios.get('http://localhost:216/staff/delStaff/id='+idStaff).then(res =>{
+               //                // getDataStaff()
+               //             })
+               //           resolve();
+               //       }, 1000);
+               //   })
+               }}
          />
          
       </div>

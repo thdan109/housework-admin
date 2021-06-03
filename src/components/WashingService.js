@@ -68,7 +68,7 @@ import ModalWashing from './modals/ModalWashing'
       }
    }
    const  [columns, setColumns] = useState([
-      { title: "ID đơn", field: '_id'},
+      // { title: "ID đơn", field: '_id'},
       { title: 'Tên KH', field: 'fullname' },
       { title: "Ngày gửi", field: 'dateSend', type: 'date'},
       { title: 'Giờ gửi', field: 'timeSend'},
@@ -91,7 +91,7 @@ import ModalWashing from './modals/ModalWashing'
              </select>
          </>
        )},
-      { title: 'Địa chỉ', field: 'address' },
+      { title: 'Địa chỉ', field: 'address', width: '30%' },
       { title: 'Tổng tiền',  field: 'money'},
       { title: 'Phân công', field: 'dataStaff.arrs',render: rowData => (
          <>
@@ -118,6 +118,9 @@ import ModalWashing from './modals/ModalWashing'
          icons={tableIcons}
          columns={columns}
          data={data}
+         options={{
+            tableLayout: "auto"
+         }}
          editable={{
             // onRowAdd: newData =>
             //   new Promise((resolve, reject) => {
@@ -160,7 +163,6 @@ import ModalWashing from './modals/ModalWashing'
             //   })
             }}
          />
-         
       </div>
 
    )

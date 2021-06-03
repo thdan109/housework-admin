@@ -106,6 +106,10 @@ const ModalUpdateSalary = ( props ) =>{
                            <Label className='TitleName'>Nghỉ</Label>
                            <Input placeholder={dataSalary.absent} id='absent' onChange={(val) => handleChange(val)} /> 
                         </div>
+                        <div className='divContainerInput'>
+                           <Label className='TitleName'>Lương cứng </Label>
+                           <Input placeholder={dataSalary.salary} id='absent' onChange={(val) => handleChange(val)} /> 
+                        </div>
                      </div>
                      ))
                   }

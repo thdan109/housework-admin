@@ -46,7 +46,7 @@ const LoginAdmin = (props) =>{
          <div className='LoginAdmin'>
 
             <div className='TitleLoginAdmin'>
-               LOGIN
+               ĐĂNG NHẬP
             </div>
                <form onSubmit={(e)=>LoginAdmin(e)} noValidate  autoComplete="off" >
                   <div className='TextfieldUsername'>

@@ -82,7 +82,7 @@ const tableIcons = {
    return (
    <div>
       {/* <button onClick={()=>console.log(data)}>aaaaaaaaaaaaaaaa</button> */}
-      <ModalAddService />
+      {/* <ModalAddService /> */}
       <MaterialTable
       title="Quản lý Dịch vụ"
       icons={tableIcons}

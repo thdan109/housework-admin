@@ -70,7 +70,7 @@ const ModalWashing = ( props ) =>{
       <div>
 
          <Button color="primary" onClick={()=>toggle()}>Danh sách</Button>
-         <Modal isOpen={modal} toggle={toggle} className={className}>
+         <Modal isOpen={modal} toggle={toggle} className={className} size="lg">
          <ModalHeader toggle={toggle}>Phân công nhân viên</ModalHeader>
          {/* <Button color="primary" onClick={()=>console.log(idStaff)}>Danh sách</Button> */}
             <ModalBody>
@@ -78,8 +78,9 @@ const ModalWashing = ( props ) =>{
                   <table border='1' className='table'>
                      <tr>
                         <th>Action</th>
-                        <th>ID NV</th>
-                        <th>Tên nhân viên</th>
+                        <th style={{textAlign: 'center'}}>ID NV</th>
+                        <th style={{textAlign: 'center'}}>Tên nhân viên</th>
+                        <th style={{textAlign: 'center'}}>Việc đã làm</th>
                      </tr>
                      {
                         state.map(dt=>(
@@ -89,8 +90,9 @@ const ModalWashing = ( props ) =>{
                                  <input type='checkbox' id={dt._id}  value={dt._id} onChange={(e) => handleChange(e)} 
                                  />
                               </td>
-                              <td>{dt._id}</td>
-                              <td>{dt.fullnameStaff}</td>
+                              <td style={{textAlign: 'center'}}>{dt._id}</td>
+                              <td style={{textAlign: 'center'}}>{dt.fullnameStaff}</td>
+                              <td style={{textAlign: 'center'}}>{dt.numberWorkMonth}</td>
                            </tr>
                         ))
                      }
