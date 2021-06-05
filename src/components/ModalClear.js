@@ -41,6 +41,7 @@ const ModalClear = ( props ) =>{
    const getDataStaff = () =>{
       // console.log('aaa')
       const data = props.data
+      console.log(props.data);
       Axios.post('http://localhost:216/staff/statusStaff', {
          dttime: data
       }).then(res =>{

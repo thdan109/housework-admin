@@ -1,11 +1,12 @@
 import React from 'react'
 // import {BarChart, Bar ,ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
-import { Bar } from "react-chartjs-2"; 
+import { Bar, Pie } from "react-chartjs-2"; 
 import '../styles/Statistical.css'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, Input, Label } from 'reactstrap';
 import { makeStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import axios from 'axios';
+import NumberFormat from 'react-number-format'
 import { ListItemText } from '@material-ui/core';
 
 
@@ -38,7 +39,7 @@ const Statistical = () =>{
    const nowdate = new Date(Date.now()).getFullYear()
    const [dataClear, setDataClear] = React.useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ])
    const [dataCooking, setDataCooking] = React.useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ])
-   const [dataWashing, setDataWashing] = React.useState()
+   const [dataWashing, setDataWashing] = React.useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ])
 
    const [dataClearMonth, setDataClearMonth] = React.useState()
    const [dataCookingMonth, setDataCookingMonth] = React.useState()
@@ -48,6 +49,14 @@ const Statistical = () =>{
    const [monthCooking, setMonthCooking] = React.useState()
    const [monthWashing, setMonthWashing] = React.useState()
 
+   const [ dataTotalClear, setDataTotalClear ] = React.useState([0,0,0,0,0,0,0,0,0,0,0,0])
+   const [dataTotalCooking, setDataTotalCooking] = React.useState([0,0,0,0,0,0,0,0,0,0,0,0])
+   const [ dataTotalWashing,setDataTotalWashing] = React.useState([0,0,0,0,0,0,0,0,0,0,0,0])
+
+   const [ dataTotalClearVal, setDataTotalClearVal ] = React.useState([0,0,0,0,0,0,0,0,0,0,0,0])
+   const [dataTotalCookingVal, setDataTotalCookingVal] = React.useState([0,0,0,0,0,0,0,0,0,0,0,0])
+   const [ dataTotalWashingVal,setDataTotalWashingVal ] = React.useState([0,0,0,0,0,0,0,0,0,0,0,0])
+ 
    const classes = useStyles();
    const [activeTab, setActiveTab] = React.useState('1');
 
@@ -59,8 +68,8 @@ const Statistical = () =>{
 
    const getData = async () =>{
       
-      // const dataClear = await axios.post('http://localhost:216/clearsave/data')
-      // setDataClear(dataClear.data)
+      const dataClear = await axios.post('http://localhost:216/clearsave/data')
+      setDataClear(dataClear.data)
 
       const dataWashing = await axios.post('http://localhost:216/washingsave/data')
       setDataWashing(dataWashing.data)
@@ -83,6 +92,19 @@ const Statistical = () =>{
       }
       // console.log(days);
       setDay(days)
+   }
+   const [day1, setDay1] = React.useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31])
+   const getDay1 = (nowdate,val) =>{
+      var year = Number(nowdate)
+      var month = Number(val.target.value)
+      var date = new Date(year,month, 0);
+      var days = []; 
+      var datee = date.getDate()
+      for (var i=1;i<=datee;i++ ){
+         days.push(i)
+      }
+      // console.log(days);
+      setDay1(days)
    }
 
 
@@ -125,7 +147,7 @@ const Statistical = () =>{
 
    }
    const handleChangeWashing = async(val) =>{
-      setMonthWashing(val.target.value)
+      // setMonthWashing(val.target.value)
       const dataWashingg = await axios.post('http://localhost:216/washingsave/dataWashingByMonth',{
          month:val.target.value
       })
@@ -140,6 +162,84 @@ const Statistical = () =>{
       setDataWashing(arr);
    }
 
+
+   const handleChangeTotal = async(val) =>{
+      setMonthWashing(val.target.value)
+
+      const dataClearTotal = await axios.post('http://localhost:216/clearsave/totalClear',{
+         month:val.target.value 
+      })
+      const arrClear = [0,0,0,0,0,0,0,0,0,0,0,0]
+      dataClearTotal.data.map(item =>{
+         const index = Number(item._id)
+         arrClear[index] += Number(item.sum);
+      })
+      // console.log(data);
+      setDataTotalClear(arrClear);
+
+      const dataCookingTotal = await axios.post('http://localhost:216/cookingsave/totalCooking',{
+         month: val.target.value 
+      })
+      const arrCooking = [0,0,0,0,0,0,0,0,0,0,0,0]
+      dataCookingTotal.data.map(item =>{
+         const index = Number(item._id)
+         arrCooking[index] += Number(item.sum);
+      })
+      // console.log(data);
+      setDataTotalCooking(arrCooking);
+
+     
+      const dataWashingTotal = await axios.post('http://localhost:216/washingsave/totalWashing',{
+         month:val.target.value 
+      })
+      const arrWashing = [0,0,0,0,0,0,0,0,0,0,0,0]
+      dataWashingTotal.data.map(item =>{
+         const index = Number(item._id)
+         arrWashing[index] += Number(item.sum);
+      })
+      // console.log(data);
+      setDataTotalWashing(arrWashing);
+      
+   }
+
+   const handleChangeTotalWorkVal = async(val) =>{
+      setMonthClear(val.target.value)
+
+      const dataClearTotalVal = await axios.post('http://localhost:216/clearsave/totalClearWorkVal',{
+         month:val.target.value 
+      })
+      const arrClearVal = [0,0,0,0,0,0,0,0,0,0,0,0]
+      dataClearTotalVal.data.map((item )=>{
+         const index = Number(Object.keys(item))
+         arrClearVal[index] += Number(Object.values(item));
+      })
+      // console.log(data);
+      setDataTotalClearVal(arrClearVal);
+
+      const dataCookingTotalVal = await axios.post('http://localhost:216/cookingsave/totalCookingWorkVal',{
+         month: val.target.value 
+      })
+      const arrCookingVal = [0,0,0,0,0,0,0,0,0,0,0,0]
+      dataCookingTotalVal.data.map(item =>{
+         const index = Number(Object.keys(item))
+         arrCookingVal[index] += Number(Object.values(item));
+      })
+      // console.log(data);
+      setDataTotalCookingVal(arrCookingVal);
+
+     
+      const dataWashingTotalVal = await axios.post('http://localhost:216/washingsave/totalWashingWorkVal',{
+         month:val.target.value 
+      })
+      const arrWashingVal = [0,0,0,0,0,0,0,0,0,0,0,0]
+      dataWashingTotalVal.data.map(item =>{
+         const index = Number(Object.keys(item))
+         arrWashingVal[index] += Number(Object.values(item));
+      })
+      // console.log(data);
+      setDataTotalWashingVal(arrWashingVal);
+      
+   }
 
    const [ data, setDate] = React.useState([
       {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
@@ -168,19 +268,131 @@ const Statistical = () =>{
       {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
    ])
 
-  
-   
-
-
-
-
-
-
-
    return (
       <div className="wrapper">
          <h2 className="tiltle">THỐNG KÊ</h2>
-         {/* <h2 onClick={()=>console.log(dataClear)}>aaaaaaaaaaaaaaaaa</h2> */}
+
+        
+
+         <div className="pieChart" >
+            <div className="totalMoney">
+            <h4 className="tiltle">Cơ cấu doanh thu</h4>
+               <div className="input-select">
+                  <Label style={{fontWeight: 'bold'}}  for="SelectedMonthClear">Tháng</Label>
+                  <Input onChange={(val)=>{
+                        handleChangeTotal(val)
+                        getDay(nowdate,val)
+                     }} 
+                     style={{width: 300}} type="select" id="SelectedMonthClear" 
+                  >
+                     <option>1</option>
+                     <option>2</option>
+                     <option>3</option>
+                     <option>4</option>
+                     <option>5</option>
+                     <option>6</option>
+                     <option>7</option>
+                     <option>8</option>
+                     <option>9</option>
+                     <option>10</option>
+                     <option>11</option>
+                     <option>12</option>
+                  </Input>
+               </div>
+               <div className='wrapPie'>
+                  <div style={{fontWeight: 'bold', display: 'flex', justifyContent: 'center'}}>
+                     Tổng tháng:  
+                     <NumberFormat 
+                        style={{marginLeft: 15,marginRight: 5}} 
+                        value={Number(dataTotalClear[monthWashing]) + Number(dataTotalCooking[monthWashing]) + Number(dataTotalWashing[monthWashing])} 
+                        displayType={'text'} 
+                        thousandSeparator={true} 
+                        prefix={''} 
+                     /> VNĐ
+                  </div>
+                  <Pie
+                     data = {{
+                        labels: [
+                        'Dọn nhà',
+                        'Nấu ăn',
+                        'Giặt ủi'
+                        ],
+                        datasets: [{
+                        label: 'VNĐ (Việt Nam đồng)',
+                        data: [dataTotalClear[monthWashing], dataTotalCooking[monthWashing], dataTotalWashing[monthWashing]],
+                        backgroundColor: [
+                           'rgb(255, 99, 132)',
+                           'rgb(54, 162, 235)',
+                           'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                        }]
+                     }}
+                     height={10}
+                     width={50}   
+                     />
+               </div>
+            </div>
+            <div className="totalWork">
+            <h4 className="tiltle">Cơ cấu việc</h4>
+            {/* <div onClick={()=>console.log(dataTotalClearVal)}>aaaaaaaaa</div> */}
+               <div className="input-select">
+                  <Label style={{fontWeight: 'bold'}}  for="SelectedMonthClear">Tháng</Label>
+                  <Input onChange={(val)=>{
+                        handleChangeTotalWorkVal(val)
+                        getDay1(nowdate,val)
+                     }} 
+                     style={{width: 300}} type="select" id="SelectedMonthClear" 
+                  >
+                     <option>1</option>
+                     <option>2</option>
+                     <option>3</option>
+                     <option>4</option>
+                     <option>5</option>
+                     <option>6</option>
+                     <option>7</option>
+                     <option>8</option>
+                     <option>9</option>
+                     <option>10</option>
+                     <option>11</option>
+                     <option>12</option>
+                  </Input>
+               </div>
+               <div className='wrapPie'>
+                  <div style={{fontWeight: 'bold', display: 'flex', justifyContent: 'center'}}>
+                     Tổng tháng:  {Number(dataTotalClearVal[monthClear]) + Number(dataTotalCookingVal[monthClear]) + Number(dataTotalWashingVal[monthClear])} việc
+                     {/* <NumberFormat 
+                        style={{marginLeft: 15,marginRight: 5}} 
+                        value={Number(dataTotalClear[monthWashing]) + Number(dataTotalCooking[monthWashing]) + Number(dataTotalWashing[monthWashing])} 
+                        displayType={'text'} 
+                        thousandSeparator={true} 
+                        prefix={''} 
+                     /> VNĐ */}
+                  </div>
+                  <Pie
+                     data = {{
+                        labels: [
+                        'Dọn nhà',
+                        'Nấu ăn',
+                        'Giặt ủi'
+                        ],
+                        datasets: [{
+                        label: 'VNĐ (Việt Nam đồng)',
+                        data: [dataTotalClearVal[monthClear], dataTotalCookingVal[monthClear], dataTotalWashingVal[monthClear]],
+                        backgroundColor: [
+                           'rgb(255, 99, 132)',
+                           'rgb(54, 162, 235)',
+                           'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                        }]
+                     }}
+                     height={10}
+                     width={50}   
+                     />
+               </div>
+            </div>
+         </div>
 
          <Nav tabs>
             
@@ -296,15 +508,19 @@ const Statistical = () =>{
             </Row>
          </TabPane>
 
-         <TabPane tabId="2" style={{borderLeft: '2px solid orange'}}>
+         <TabPane tabId="2"  style={{borderLeft: '2px solid red'}}  >
             <Row>
-               
                <Col>
                   <Card>
-                     <div className="grid-div2">
+                     <div className="grid-div1">
                         <div className="input-select">
                            <Label style={{fontWeight: 'bold'}}  for="SelectedMonthCooking">Tháng</Label>
-                           <Input style={{width: 300}} type="select" id="SelectedMonthCooking" >
+                           <Input onChange={(val)=>{
+                                 handleChangeCooking(val)
+                                 getDay(nowdate,val)
+                              }} 
+                              style={{width: 300}} type="select" id="SelectedMonthCooking"
+                           >
                               <option>1</option>
                               <option>2</option>
                               <option>3</option>
@@ -318,37 +534,38 @@ const Statistical = () =>{
                               <option>11</option>
                               <option>12</option>
                            </Input>
-                           <Bar
-                        
-                              data={{
-                                 labels: day
-                                 ,
-                                 datasets: [
-                                 {
-                                    label: "VNĐ (Việt Nam đồng)",
-                                    backgroundColor: [
-                                       "#3e95cd",
-                                       "#8e5ea2",
-                                       "#3cba9f",
-                                       "#e8c3b9",
-                                       "#c45850",
-                                    ],
-                                    data: dataCooking
-                                    // data: dataClear
-                                 }
-                                 ]
-                              }}
-                              options={{
-                                 legend: { display: false },
-                                 title: {
-                                 display: true,
-                                 text: "Predicted world population (millions) in 2050"
-                                 }
-                              }}
-                              height={10}
-                              width={50}                           
-                           />
                         </div>
+                        <Bar
+                        
+                           data={{
+                              labels: day
+                              ,
+                              datasets: [
+                              {
+                                 label: "VNĐ (Việt Nam đồng)",
+                                 backgroundColor: [
+                                    "#3e95cd",
+                                    "#8e5ea2",
+                                    "#3cba9f",
+                                    "#e8c3b9",
+                                    "#c45850",
+                                 ],
+                                 data: dataCooking
+                                 // data: dataClear
+                              }
+                              ]
+                           }}
+                           options={{
+                              legend: { display: false },
+                              title: {
+                              display: true,
+                              text: "Predicted world population (millions) in 2050"
+                              }
+                           }}
+                           height={10}
+                           width={50}                           
+                        />
+
                      </div>
                   </Card>
                </Col>
@@ -363,7 +580,12 @@ const Statistical = () =>{
                      <div className="grid-div2">
                         <div className="input-select">
                            <Label style={{fontWeight: 'bold'}}  for="SelecltedMonthWashing">Tháng</Label>
-                           <Input style={{width: 300}} type="select" id="SelectedMonthWashing" >
+                           <Input 
+                              onChange={(val)=>{
+                                 handleChangeWashing(val)
+                                 getDay(nowdate,val)
+                              }} 
+                              style={{width: 300}} type="select" id="SelectedMonthWashing" >
                               <option>1</option>
                               <option>2</option>
                               <option>3</option>
@@ -437,12 +659,39 @@ const Statistical = () =>{
          </ResponsiveContainer> */}
      
 
+      {/* <div className="pieChart" >
+
+
+
+         <Pie
+            data = {{
+               labels: [
+                 'Red',
+                 'Blue',
+                 'Yellow'
+               ],
+               datasets: [{
+                 label: 'My First Dataset',
+                 data: [300, 50, 100],
+                 backgroundColor: [
+                   'rgb(255, 99, 132)',
+                   'rgb(54, 162, 235)',
+                   'rgb(255, 205, 86)'
+                 ],
+                 hoverOffset: 4
+               }]
+             }}
+             height={10}
+               width={50}   
+         />
+
+        
+      </div> */}
+
+         
+
+         
       
-
-         
-
-         
-
 
 
 

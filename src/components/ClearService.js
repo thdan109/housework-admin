@@ -118,12 +118,14 @@ import axios from 'axios';
       //       width:20,
       //       maxWidth: 20
       //  }},
-      { title: 'Tên KH', field: 'username' },
+      { title: 'Tên KH', field: 'username', width: '10%' },
       { title: "Diện tích", field: 'area'},
       { title: 'Giờ làm', field: 'timeWork'},
-      { title: 'Nhân viên' , field: 'nameStaff', 
+      { title: 'Nhân viên' , field: 'nameStaff', width:  '200px',
          render: rowData=>
-            rowData.nameStaff.map((dt)=> <p>{dt}</p>)
+            rowData.nameStaff.map((dt)=> 
+               <p>{dt}</p>
+            )
       },
       { title: 'Thời gian', field: 'timeStart'},
       { title: 'Ngày', field: 'date', type: 'date'},

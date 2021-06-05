@@ -61,8 +61,13 @@ import {
    }
 
    const  [columns, setColumns] = useState([
-      { title: 'Tên Voucher', field: 'nameVoucher' },
+      { title: 'Tên Voucher', field: 'nameVoucher', rowData: dt =>{
+         <div style={{display: 'flex'}}>
+           <p> {dt}</p>
+         </div>
+      } },
       { title: 'Mã Voucher', field: 'codeVoucher' },
+      { title: 'Mô tả', field: 'description'},
       { title: 'Mệnh giá', field: 'prince' }
    ]);
    const [data, setData] = useState([]);
