@@ -56,7 +56,7 @@ const tableIcons = {
    const  [columns, setColumns] = useState([
      { title: 'Họ và Tên', field: 'fullname' },
      { title: 'Tên đăng nhập', field: 'username'},
-     { title: 'Mật khẩu', field: 'password' },
+     { title: 'Mật khẩu', field: 'password',render: rowData => ( <div>****************</div> )},
      { title: 'Ngày sinh', field: 'birthday', type: 'date'},
      { title: 'Địa chỉ', field: 'address'},
      { title: 'Số CMND', field: 'IDCard'},

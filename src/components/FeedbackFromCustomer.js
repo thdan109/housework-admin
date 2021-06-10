@@ -23,6 +23,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useEffect } from 'react';
 import MyComponent from './getDataStaffFree'
 import ModalAssignment from './ModalAssignment'
+import { red } from '@material-ui/core/colors';
 
    const tableIcons = {
       Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -63,7 +64,7 @@ import ModalAssignment from './ModalAssignment'
 
    const  [columns, setColumns] = useState([
       { title: "ID đơn", field: 'idWork'},
-      { title: 'Tên KH', field: 'nameUser' },
+      { title: 'Tên KH', field: 'nameUser'},
       { title: 'Điểm', field: 'rate',render: rowData =>(
 
          <>

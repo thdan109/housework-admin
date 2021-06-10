@@ -97,7 +97,7 @@ import {
                </Input>
          </>
       ) },
-      { title: 'Nội dung',  field: 'contentfeedback'},
+      // { title: 'Nội dung',  field: 'contentfeedback'},
    ]);
    const [data, setData] = useState([]);
    

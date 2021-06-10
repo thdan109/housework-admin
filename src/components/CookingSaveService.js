@@ -51,23 +51,23 @@ const tableIcons = {
 
 
    const getDataOrder = () =>{
-      Axios.get('http://localhost:216/cookingsave/dataCooking').then(res =>{
+      Axios.get('http://localhost:216/cookingsave/dataSaveCooking').then(res =>{
          setData(res.data)  
       })  
    }
 
-   const handleChangeStatus = async(e) =>{
-      const status = e.target.value
-      const id = e.target[e.target.selectedIndex].id
-      const data = await Axios.post('http://localhost:216/cooking/changeStatus',{
-         id: id,
-         status : status 
-      })
-      // getData()
-      if (data.data.notifi === "Oke"){
-         getDataOrder()
-      }
-   }
+   // const handleChangeStatus = async(e) =>{
+   //    const status = e.target.value
+   //    const id = e.target[e.target.selectedIndex].id
+   //    const data = await Axios.post('http://localhost:216/cooking/changeStatus',{
+   //       id: id,
+   //       status : status 
+   //    })
+   //    // getData()
+   //    if (data.data.notifi === "Oke"){
+   //       getDataOrder()
+   //    }
+   // }
 
    const  [columns, setColumns] = useState([
       { title: "ID đơn", field: '_id'},
@@ -108,19 +108,19 @@ const tableIcons = {
             //     }, 1000)
             //   }),
 
-            onRowUpdate: (newData, oldData) =>
-            new Promise((resolve, reject) => {
-               setTimeout(() => {
-                  const dataUpdate = [...data];
-                  const index = oldData.tableData.id;
-                  dataUpdate[index] = newData;
-                  setData([...dataUpdate]);
-                     Axios.post('http://localhost:216/staff/updatedataStaff',
-                        newData
-                     )
-                  resolve();
-               }, 1000)
-            }),
+            // onRowUpdate: (newData, oldData) =>
+            // new Promise((resolve, reject) => {
+            //    setTimeout(() => {
+            //       const dataUpdate = [...data];
+            //       const index = oldData.tableData.id;
+            //       dataUpdate[index] = newData;
+            //       setData([...dataUpdate]);
+            //          Axios.post('http://localhost:216/staff/updatedataStaff',
+            //             newData
+            //          )
+            //       resolve();
+            //    }, 1000)
+            // }),
 
             //   onRowDelete: oldData =>
             //   new Promise((resolve, reject) => {

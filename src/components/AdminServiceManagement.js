@@ -64,7 +64,7 @@ const tableIcons = {
       //    </>
       //    )
       // },
-      { title: 'Id dịch vụ', field: '_id' },
+      // { title: 'Id dịch vụ', field: '_id' },
       { title: 'Tên dịch vụ', field: 'nameService' },
       { title: 'Mô tả dịch vụ', field: 'descriptionService'},
       { title: 'Giá dịch vụ', field: 'prince', render: rowData=>(
@@ -84,7 +84,11 @@ const tableIcons = {
       {/* <button onClick={()=>console.log(data)}>aaaaaaaaaaaaaaaa</button> */}
       {/* <ModalAddService /> */}
       <MaterialTable
-      title="Quản lý Dịch vụ"
+      title={
+         <div style={{fontWeight: 'bold', fontSize: 18.1}}>
+            QUẢN LÝ DỊCH VỤ
+         </div>
+      }
       icons={tableIcons}
       columns={columns}
       data={data}

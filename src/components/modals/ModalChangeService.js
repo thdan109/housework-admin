@@ -110,7 +110,7 @@ const ModalChangeService = ( props ) =>{
                      sendDataUpdateById()
                }}>Đồng ý</Button>
                <Button color="secondary" onClick={()=>toggle()}>Trở lại</Button>
-               <Button color="primary" onClick={()=>console.log(dataUpdate)}>Đồng ý</Button>
+               {/* <Button color="primary" onClick={()=>console.log(dataUpdate)}>Đồng ý</Button> */}
             </ModalFooter>
          </Modal>
       </div>

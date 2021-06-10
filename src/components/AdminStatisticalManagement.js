@@ -116,14 +116,15 @@ const AdminStatistical = () =>{
                   <Row>
                      <Col >
                         <Card>
-                           <ClearSave />
+                        <CookingSave />
                         </Card>
                      </Col>
                   </Row>
                </TabPane>
                <TabPane tabId="2">
                   <Card>
-                     <CookingSave />
+                       <ClearSave />
+                     
                   </Card>
                      
                </TabPane>
